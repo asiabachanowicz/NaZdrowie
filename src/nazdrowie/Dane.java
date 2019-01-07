@@ -25,7 +25,7 @@ import javax.swing.*;
  * @author Asia
  */
 
-public class Dane extends JPanel {
+public class Dane extends JPanel implements ActionListener {
     
     //pola tekstowe (wpisywanie danych)
     JTextField timie;
@@ -54,6 +54,10 @@ public class Dane extends JPanel {
     String wiek;
     String masa;
     String wzrost;
+    double podanamasa;
+    double podanywzrost;
+    double podanywiek;
+    public double liczbakalorii;
     
     BufferedImage background;
     
@@ -174,8 +178,60 @@ public class Dane extends JPanel {
         bOblicz.setForeground(Color.BLACK);
         bOblicz.setFont(new Font("Trebuchet MS", Font.BOLD, 25));
         add(bOblicz);
-       
+       bOblicz.addActionListener(this);
         
         
     }
+     
+    //obliczenie dziennego zapotrzebowania na kalorie
+    @Override
+    public void actionPerformed(ActionEvent e){
+       
+       
+        //zamiana String na double
+        podanamasa = Double.parseDouble(tmasa.getText());
+        podanywzrost = Double.parseDouble(twzrost.getText());
+        podanywiek = Double.parseDouble(twiek.getText());
+        
+        //kobiety 
+       
+        if (Bplec.getSelectedIndex() == 0){
+        
+        liczbakalorii = 655+(9.6*podanamasa)+(1.8*podanywzrost)-(4.7*podanywiek);
+        tliczbakalorii.setText(String.valueOf(liczbakalorii));
+              
+        }
+        //mezczyzni
+        
+        else{
+        liczbakalorii = 66.5+(13.7*podanamasa)+(5*podanywzrost)-(6.8*podanywiek);
+        tliczbakalorii.setText(String.valueOf(liczbakalorii));
+        
+        }
+     
+       
+       //zapis liczby kalorii do pliku
+        try {
+            PrintWriter zapis= new PrintWriter("zapis_zapotrzebowania kalorycznego.txt");
+            zapis.println("" +liczbakalorii);
+            zapis.close();
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(Dane.class.getName()).log(Level.SEVERE, null, ex);
+        }
+       
+       
+      
+        
+    }
+
+ 
+    protected void paintComponent(Graphics gs){
+        Graphics2D g=(Graphics2D)gs;
+        //Ustaw tryb lepszej jakości grafiki (wygładzanie/antyaliasing)
+        g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+        // Narysuj tło
+        g.drawImage(GPars.menubackground, 0, 0, null);
+
+ }    
+
 }

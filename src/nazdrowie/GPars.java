@@ -17,6 +17,8 @@ public class GPars {
     public final static long NO_LEVELS=5;
     /**  Obraz tla   */
     public static Image bgImage;
+    //Tło menu
+    public static Image menubackground;
   
     /**  tlo Menu  */
     public static Image bgMenu;
