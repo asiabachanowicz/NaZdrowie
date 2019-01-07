@@ -141,6 +141,61 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener  {
                 }
             }
         
+         // gdy zlapano zdrowy obiekt
+        for(int i=0;i<fFood.length;i++){
+            if(fFood[i].hit){
+               //odrysowanie elementow
+               g.drawImage(fFood[i].icon,fFood[i].currX+50,fFood[i].currY=0,(int)(fFood[i].icon.getWidth(null) ), (int)(fFood[i].icon.getHeight(null)),null);  
+               fFood[i].hit=false;
+
+               //odtworzenie dzwieku
+               playSound(new File("sounds/eatingsound.wav"));
+               //zwiekszamy liczbe punktow
+               if (gStatus.liczbazyc>=1){
+               gStatus.points+=70;
+               }
+            }
+        }
+        
+        // gdy zlapano niezdrowy obiekt
+        for(int i=0;i<fFood2.length;i++){
+            if(fFood2[i].hit){
+                //odrysowanie elementow
+                g.drawImage(fFood2[i].icon,fFood2[i].currX+50,fFood2[i].currY=0,(int)(fFood2[i].ikona.getWidth(null) ), (int)(fFood2[i].ikona.getHeight(null)),null);  
+                fFood2[i].hit=false;
+                //zmniejszamy liczbe zyc
+                gStatus.liczbazyc--;
+                //odtworzenie dzwieku
+                playSound(new File("sounds/error.wav"));
+                //zwiekszamy liczbe punktow
+                if (gStatus.liczbazyc>=1){
+                gStatus.points+=200;
+                }
+            }      
+        }
+        
+        //czy najchechano ludzikiem na zdrowy obiekt
+            for(int i=0;i<fFood.length;i++){
+                if((x+75)<=(fFood[i].currX+100) && (x+75)>=fFood[i].currX  ){
+                    if(550<=(fFood[i].currY+100) && (fFood[i].currY+100)<=773){  
+                        if(!fFood[i].hit){
+                        fFood[i].setHit();
+                        }
+                    }
+                }
+            }
+            
+        //czy najchechano ludzikiem na niezdrowy obiekt
+        for(int i=0;i<fFood2.length;i++){
+            if((x+75)<=(fFood2[i].currX+100) && (x+75)>=fFood2[i].currX  ){
+                if(550<=(fFood2[i].currY+100) && (fFood2[i].currY+100)<=773){  
+                    if(!fFood2[i].hit){
+                      fFood2[i].setHit();
+                    }
+                }
+            }
+        }
+            
               
         //Ustaw kolor dolnego paska Menu i narysuj pasek
         g.setColor(new Color(250,224,171));
@@ -295,5 +350,23 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener  {
             fFood2[i].setYPos(yLine*shiftBL2*-1);
     }
     }//koniec restartGame()
+    
+    //Funkcja odtwarzania dźwięku z pliku
+     
+    public static synchronized void playSound(final File f) {
+        new Thread(new Runnable() {
+          public void run() {
+            try {
+              Clip clip = AudioSystem.getClip();
+              AudioInputStream inputStream = AudioSystem.getAudioInputStream(f);
+              clip.open(inputStream);
+              clip.start(); 
+            } catch (Exception e) {
+              System.err.println(e.getMessage());
+            }
+          }
+        }).start();
+    }
+   
 
 }//koniec klasy GamePanel
