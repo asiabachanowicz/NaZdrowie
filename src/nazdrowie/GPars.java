@@ -53,6 +53,13 @@ public class GPars {
     public static int gWidth=1280;
     /** Wysokosc pola graficznego gry */
     public static int gHeight=900;
+     //informacje o produktach
+    public static Image info1;
+    public static Image info2;
+    public static Image info3;
+    public static Image info4; 
+    //instrukcja
+    public static Image instrukcja;
     
     /**
      * Metoda ladowania poczatkowych zasobow gry
@@ -66,7 +73,13 @@ public class GPars {
         body=loadImage("images/body.png");
         zycia=loadImage("images/pizza2.png");
         minilogo=loadImage("images/logomini.png");
-
+        menubackground = loadImage("images/2.png");
+        instrukcja = loadImage("images/instrukcja2.png");
+        info1 = loadImage("images/info1.png");
+        info2 = loadImage("images/info2.png");
+        info3 = loadImage("images/info3.png");
+        info4 = loadImage("images/info4.png");
+        ilekalorii = loadImage("images/kalorie.png");
 
          //tablica ze zdrowymi produktami
         food= new Image[24];

@@ -157,17 +157,15 @@ public class FlyingFood {
     public void calculatePathPos(int mode){
         int tmpX=0;
         switch(mode){
-           
-            case 1://sinus
+           case 1: //poziom 1
                    currY=currY+dy;
                    if(currY>sHeight) { 
                        currY=0;
                    }
-                   tmpX=(int)(ampl*Math.sin(angle*currY));
+                   tmpX=0;
                    currX=x+tmpX;
-                   
-                   break; 
-            default: break;    
+                    break;
+         default: break;  
         }
         
     }//calculatePathPos()

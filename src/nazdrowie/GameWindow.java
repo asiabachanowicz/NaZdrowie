@@ -1,72 +1,240 @@
 package nazdrowie;
-import java.awt.GridLayout;
+
+
+import java.awt.CardLayout;
 import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import javax.swing.JFrame;
+import javax.swing.JPanel;
+
 /**
- *
+ * Przełączanie paneli 
  * @author Asia
  */
 
 public class GameWindow extends JFrame{
     
-   /**
-     * Ustawianie parametrów i rozpoczęcia akcji
-     * @param width szerokosc okna
-     * @param height wysokosc okna
-     * @param x pozycja x lewego gornego naroznika okna 
-     * @param y pozycja y lewego gornego naroznika okna 
-     */
-    public GameWindow(int width, int height, int x, int y){
-        super(); //utworz okno
-        setSize(width, height); //ustaw wymiary okna
-        setLocation(x,y); //ustaw pozycje okna
-        setResizable(false); //zablokuj mozliwosc zmian rozmiaru okna
-        //setUndecorated(true); //ukryj ramke okna i przyciski kontrolne
-        initGUI(width,height); //wywolaj metode budowy interfejsu
-        setVisible(true); //pokazokno
-        animationLoop(); //uruchom animacje gry
-              
-    }//koniec GameWindow()   
+    MenuPanel menu = new MenuPanel();
+    Instrukcja instrukcja = new Instrukcja();
+    Dane danegracza = new Dane();
+    GamePanel nowagra = new GamePanel();
+    Informacje1 info1 = new Informacje1();
+    Informacje2 info2 = new Informacje2();
+    Informacje3 info3 = new Informacje3();
+    Informacje4 info4 = new Informacje4();
     
-    /**
-     * Utworz interfejs graficzny uzytkownika
-     * @param width szerokoscokna
-     * @param height wysokosc okna
-     */
-    private void initGUI(int width, int height){
-        setLayout(new GridLayout(1,1)); //ustaw rozklad 
-        //ustaw zasoby i parametry poczatkowe
-        GPars.loadInitialImages();
+    JPanel cardPanel;
+    CardLayout cl;
+    
+   
+    public GameWindow(int width, int height, int x, int y){
+        
+        
+    super();
+    this.nowagra = new GamePanel();
+    setSize(width, height);
+    setLocation(x,y);
+    this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    setResizable(false); //zablokuj możliwość zmian rozmiaru okna
+    setUndecorated(true); //ukryj ramke okna i przyciski kontrolne
+    setVisible(true);
+    
+    panels();  
+    initGUI();
+    
+              
+    }//koniec GameWindow()  
+    
+    public void panels(){
+    cardPanel = new JPanel(new CardLayout());
+    getContentPane().add(cardPanel); 
+    cardPanel.add(menu, "MENU");
+    cardPanel.add(nowagra, "NOWA GRA");
+    cardPanel.add(danegracza, "DANE GRACZA");
+    cardPanel.add(instrukcja, "INSTRUKCJA");
+    cardPanel.add(info1, "INFORMACJE O PRODUKTACH1");
+    cardPanel.add(info2, "INFORMACJE O PRODUKTACH2");
+    cardPanel.add(info3, "INFORMACJE O PRODUKTACH3");
+    cardPanel.add(info4, "INFORMACJE O PRODUKTACH4");
+   
+ 
+    
+    cl=(CardLayout) cardPanel.getLayout();
+    //otworzenie panelu Menu
+    cl.show(cardPanel, "MENU");
+    
+    //po kliknieciu buttonu Nowa Gra w Menu otwierana sie Dane Gracza, itd.
+    menu.bNowaGra.addActionListener(new ActionListener(){
+        
+        @Override
+        public void actionPerformed(ActionEvent e){
+            cl.show(cardPanel, "DANE GRACZA");
+            
+        }
+    });
+    
+       
+       
+     menu.bWyswietlInfo.addActionListener(new ActionListener(){
+        @Override
+        public void actionPerformed(ActionEvent e){
+            cl.show(cardPanel, "INFORMACJE O PRODUKTACH1");
+            
+        }
+    });
+      
+     menu.bZakonczGre.addActionListener(new ActionListener(){
+        @Override
+        public void actionPerformed(ActionEvent e){
+        System.exit(0);
+            
+        }
+    });
+      menu.bInstrukcja.addActionListener(new ActionListener(){
+        @Override
+        public void actionPerformed(ActionEvent e){
+        cl.show(cardPanel, "INSTRUKCJA");
+            
+        }
+    });
+      
+      instrukcja.bPrzejdzDoMenu.addActionListener(new ActionListener(){
+        @Override
+        public void actionPerformed(ActionEvent e){
+        cl.show(cardPanel, "MENU");
+            
+        }
+    });
+      
+      info1.bPrzejdzDoMenu.addActionListener(new ActionListener(){
+        @Override
+        public void actionPerformed(ActionEvent e){
+        cl.show(cardPanel, "MENU");
+            
+        }
+    });
+      
+      info1.bNastepnaStrona.addActionListener(new ActionListener(){
+        @Override
+        public void actionPerformed(ActionEvent e){
+        cl.show(cardPanel, "INFORMACJE O PRODUKTACH2");
+            
+        }
+    });
+       
+      info2.bPrzejdzDoMenu.addActionListener(new ActionListener(){
+        @Override
+        public void actionPerformed(ActionEvent e){
+        cl.show(cardPanel, "MENU");
+            
+        }
+    });
+      
+      info2.bNastepnaStrona.addActionListener(new ActionListener(){
+        @Override
+        public void actionPerformed(ActionEvent e){
+        cl.show(cardPanel, "INFORMACJE O PRODUKTACH3");
+            
+        }
+      
+    });
+      
+      info2.bPoprzedniaStrona.addActionListener(new ActionListener(){
+        @Override
+        public void actionPerformed(ActionEvent e){
+        cl.show(cardPanel, "INFORMACJE O PRODUKTACH1");
+            
+        }
+      
+    });
+      
+       
+      info3.bPrzejdzDoMenu.addActionListener(new ActionListener(){
+        @Override
+        public void actionPerformed(ActionEvent e){
+        cl.show(cardPanel, "MENU");
+            
+        }
+    });
+      
+      info3.bNastepnaStrona.addActionListener(new ActionListener(){
+        @Override
+        public void actionPerformed(ActionEvent e){
+        cl.show(cardPanel, "INFORMACJE O PRODUKTACH4");
+            
+        }
+    });
+      
+      info3.bPoprzedniaStrona.addActionListener(new ActionListener(){
+        @Override
+        public void actionPerformed(ActionEvent e){
+        cl.show(cardPanel, "INFORMACJE O PRODUKTACH2");
+            
+        }
+      
+    });
+       info4.bPrzejdzDoMenu.addActionListener(new ActionListener(){
+        @Override
+        public void actionPerformed(ActionEvent e){
+        cl.show(cardPanel, "MENU");
+            
+        }
+    });
+      
+      danegracza.bPrzejdzDoMenu.addActionListener(new ActionListener(){
+        @Override
+        public void actionPerformed(ActionEvent e){
+        cl.show(cardPanel, "MENU");
+            
+        }
+    });
+      info4.bPoprzedniaStrona.addActionListener(new ActionListener(){
+        @Override
+        public void actionPerformed(ActionEvent e){
+        cl.show(cardPanel, "INFORMACJE O PRODUKTACH3");
+            
+        }
+      
+    });
+      
+       danegracza.bOblicz.addActionListener(new ActionListener(){
+        @Override
+        public void actionPerformed(ActionEvent e){
+        cl.show(cardPanel, "WYNIK");
+            
+        }
+    });    
+       
+       danegracza.bGraj.addActionListener(new ActionListener(){
+        @Override
+        public void actionPerformed(ActionEvent e){
+        cl.show(cardPanel, "NOWA GRA");
+            
+        }
+    });
+       
+          
+       nowagra.bMenu.addActionListener(new ActionListener(){
+        @Override
+        public void actionPerformed(ActionEvent e){
+        cl.show(cardPanel, "MENU");
+            
+        }
+    });    
+       
+        
+       
+       
+    }    
+    
+
+     // Utworz interfejs graficzny uzytkownika
+ 
+    private void initGUI(){
         Toolkit tk = Toolkit.getDefaultToolkit();
        
-        add(new GamePanel(width,height)); //dodaj panel gry zawierajcy grafike i akcje
-    }//koniec initGUI()
-    
-    /**
-     * Glowna petla gry - takt animacji 
-     */
-    
-    private void animationLoop() {
-        
-        
-        //pobierz liczbe milisekund od daty referencyjnej (w ms) 
-        GPars.startTime = System.currentTimeMillis();
-        long currTime = GPars.startTime;
-
-        while (currTime - GPars.startTime < GPars.GAME_TIME) {
-          long elapsedTime = System.currentTimeMillis() - currTime;
-          //licz czas gry 
-          currTime += elapsedTime;
-          
-          //odrysuj kolejny ekran gry (nowe pozycje obiektow - symulacja ruchu)
-          repaint();
-          
-          // przerwa w czasie
-          try {
-            Thread.sleep(80);
-          } catch (InterruptedException ex) {System.out.println("Wyjątek: "+ex);      }
-        }//koniec while
-    }//koniec animationLoop()
-  
+    }
+   
 }//koniec class GameWindow
 

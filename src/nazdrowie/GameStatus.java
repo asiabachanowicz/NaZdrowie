@@ -2,39 +2,28 @@
 package nazdrowie;
 
 /**
- *
+ *Status gry
  * @author Asia
  */
 public class GameStatus {
-    /** Liczba zgromadzonych punktow na danynm poziomie*/
+    //liczba zdobytych punktow na danym poziomie
     public int points;
-    /** Numer poziomu */
+    //numer poziomu
     public int level;
-    /** Czas gry na danym poziomie*/   
-    public double time;
-    /** Liczba żyć*/
-    public int liczbazyc;
+    //liczba zyc
+    public int liczbazyc=3;
     
-    /**
-     * Zeruj parametry gry
-     */
+    
+  //zeruj parametry gry
     public void reset(){
         points=0;
         level=1;
-        time=0.0;
-    }//reset()
-    /**
-     * Zeruj liczbe punktow
-     */
+       
+    }
+    
+   //zeruj liczbe punktow
     public void resetPoints(){
         points=0;
-    }//resetPoints()
-    /**
-     * Zmien wskaznik poziomu
-     */
-    public void nextLevel(){
-        level++;
-    }//nextLevel()
-}//koniec class GameStatus
-
-
+    }
+    
+}

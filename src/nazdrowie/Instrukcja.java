@@ -3,34 +3,27 @@ package nazdrowie;
 
 import java.awt.Color;
 import java.awt.Font;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.RenderingHints;
 import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.imageio.ImageIO;
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
+import javax.swing.JPanel;
 
 /**
- *
+ *Instrukcja gry
  * @author Asia
  */
 
-public class Instrukcja extends JFrame implements ActionListener  {
+public class Instrukcja  extends JPanel   {
     
     JButton bPrzejdzDoMenu;
     BufferedImage instrukcja;
     
-    public Instrukcja() throws IOException {
+    public Instrukcja() {
         
                 
-        setSize(1200,900);
-        setTitle("NowaGra");
+        GPars.loadInitialImages();
         setLayout(null);
  
         bPrzejdzDoMenu=new JButton ("PRZEJDŹ DO MENU");
@@ -39,30 +32,18 @@ public class Instrukcja extends JFrame implements ActionListener  {
         bPrzejdzDoMenu.setForeground(Color.BLACK);
         bPrzejdzDoMenu.setFont(new Font("Trebuchet MS", Font.BOLD, 15));
         add(bPrzejdzDoMenu);
-        bPrzejdzDoMenu.addActionListener(this);
         
-             
-        instrukcja = ImageIO.read(new File("images/instrukcja2.png"));
-        JLabel instrukcja1 = new JLabel(new ImageIcon (instrukcja));
-        instrukcja1.setSize(1200,900);
-        instrukcja1.setBounds(0,0,1200,900);
-        add(instrukcja1);
+                
     }
     
-    @Override
-    public void actionPerformed(ActionEvent e){
-        Object zrodlo=e.getSource();
-                
-        if (zrodlo==bPrzejdzDoMenu){
-         
-            MenuPanel menuglowne;
-            try {
-                menuglowne = new MenuPanel();
-                menuglowne.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-                menuglowne.setVisible(true);
-            } catch (IOException ex) {
-                Logger.getLogger(Instrukcja.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }    
-    }
+        protected void paintComponent(Graphics gs){
+        Graphics2D g=(Graphics2D)gs;
+        //Ustaw tryb lepszej jakości grafiki (wygładzanie/antyaliasing)
+        g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+        // Narysuj tło
+        g.drawImage(GPars.menubackground, 0, 0, null);
+        g.drawImage(GPars.instrukcja, 0, 0, null);
+
+ }
+    
 }
