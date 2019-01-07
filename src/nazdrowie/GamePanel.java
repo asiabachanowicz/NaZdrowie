@@ -1,5 +1,7 @@
 
 package nazdrowie;
+import javax.swing.*;
+import java.awt.event.*;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
@@ -7,12 +9,16 @@ import java.awt.Graphics2D;
 import java.awt.RenderingHints;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 import javax.swing.JButton;
 import javax.swing.JPanel;
-import javax.swing.*;
-import java.awt.event.*;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
 
 
 /**
@@ -27,8 +33,12 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener  {
     public int sHeight;
     /** Liczba obiektow w linii*/
     public int objectsInLine;
-    /** Przesuniecie liniami ze spadajacymi obiektami*/
+    // Liczba obiektow w linii (niezdrowe)
+    public int objectsInLine2;
+    /** Przesuniecie liniami ze spadajacymi obiektami (zdrowe)*/
     public int shiftBL;
+    //Przesuniecie liniami ze spadajacymi obiektami (niezdrowe)
+    public int shiftBL2;
     /** Obiekt reprezentujacy status gry*/
     public GameStatus gStatus;
     /** Wysokosc paska menu*/
@@ -37,68 +47,70 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener  {
     public Font menuFont;
     /** Czcionki stosowane jako alert w polu gry*/
     public Font alertFont;
-    /** Tablica obiektow pierwszego planu - spadajace jedzenie*/ 
+    /** Tablica obiektow pierwszego planu - spadajace zdrowe jedzenie*/ 
     private FlyingFood [] fFood;
+    //Tablica obiektow pierwszego planu - spadajace niezdrowe jedzenie 
+    public FlyingFood [] fFood2;
+    //zmienna przechowujaca obliczone dzienne zapotrzebowanie na kalorie
+    public double kalorie;
+    
+    //zadeklarowane pola tekstowe, buttony
     JLabel LPoziom;
     JLabel LKalorie;
     JLabel LZycia;
+    JLabel LDoZdobycia;
+    JLabel LKoniecGry;
+    JLabel LKoniecGry2;
+    JLabel LKoniecGry3;
+    JLabel LKoniecGry4;
+    JLabel LKoniecGry5;
+    JButton bMenu;
+  
+    Timer t = new Timer (5, this);
+    //wspolrzedne ludzika
+    public double x=525, y=550, velx=0, vely=0;
    
-    
-    Timer t = new Timer (1, this);
-    double x=525, y=550, velx=0, vely=0;
-    
-    
-    /**
-     * Konstruktor klasy pola graficznego gry.
-     * @param width SzerokoĹ›Ä‡ pola graficznego gry
-     * @param height WysokoĹ›Ä‡ pola graficznego gry
-     */
+     //Konstruktor klasy pola graficznego gry.
     public GamePanel(int width, int height){
         
+        gStatus=new GameStatus();
+        gStatus.level=1;
+        GPars.MoveMODE=1;
         t.start();
         addKeyListener(this);
         setFocusable(true);
-        setFocusTraversalKeysEnabled(false);
-                       
-        gStatus=new GameStatus();
-        gStatus.reset();
-               
-        this.sWidth=width;
-        this.sHeight=height;
-        barHeight=100;
-                       
+        setFocusTraversalKeysEnabled(false);       
+        
+        menuFont=new Font("Dialog",Font.BOLD,40);
+        
+        // Przycisk Menu
+        setLayout(null);
+        bMenu= new JButton("MENU");
+        bMenu.setBackground(new Color(250,224,120));
+        bMenu.setForeground(Color.BLACK);
+        bMenu.setFont(new Font("Trebuchet MS", Font.BOLD, 30));
+        bMenu.setBounds(1000, 800, 200, 70);
+        add(bMenu);
+        
+       
+           
+        barHeight=100; //szerokosc paska menu 
         objectsInLine=1;
-        shiftBL=sHeight/(GPars.noOfObjects/objectsInLine);
-        fFood=new FlyingFood[GPars.noOfObjects];
-          restartGame();                  
+        shiftBL=900/(6/objectsInLine);
+        fFood=new FlyingFood[3];
+        
+        objectsInLine2=1;
+        shiftBL2=900/(6/objectsInLine2);
+        fFood2=new FlyingFood[3];
+        
+       restartGame();                  
         
         
-        /* Dodaj obsluge zdarzen - klikniecie przycisku myszki*/
-        addMouseListener(new MouseAdapter(){
-            @Override
-          public void mouseClicked(MouseEvent me){
-              
-              //inaczej sprawdz czy trafiono spadajacy obiekt
-              for(int i=0;i<fFood.length;i++){
-                  if(me.getY()<(sHeight-barHeight)){
-                      if(fFood[i].containsPoint(me.getX(), me.getY())){
-                          if(!fFood[i].hit){
-                              fFood[i].setHit();
-                              gStatus.points++;
-                          }
-                      }
-                  }
-              }
-          }//koniec mouseClicked()
-      });
         
         
     }//koniec GamePanel()
         
-    /**
-     * Odrysowanie panelu
-     * @param gs 
-     */
+    // Odrysowanie panelu
     @Override
     protected void paintComponent(Graphics gs){
         Graphics2D g=(Graphics2D)gs;
@@ -111,17 +123,48 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener  {
         //Narysuj ludzika
         g.drawImage(GPars.body, (int)x, (int)y, null);
                 
-        //Na tle obiektu pierwszego planu
+         //Na tle obiektu pierwszego planu
+        //zdrowe jedzenie
+        
+       
         for(int i=0;i<fFood.length;i++){
-            fFood[i].calculatePathPos(GPars.MoveMODE);
-            if(!fFood[i].hit)
-                g.drawImage(fFood[i].icon,fFood[i].currX-80,0+fFood[i].currY,(int)(fFood[i].icon.getWidth(null)), (int)(fFood[i].icon.getHeight(null)),null);
+            fFood[i].calculatePathPos(GPars.MoveMODE=1);
+                if(!fFood[i].hit){
+                    g.drawImage(fFood[i].icon,fFood[i].currX+50,fFood[i].currY+80,(int)(fFood[i].icon.getWidth(null) ), (int)(fFood[i].icon.getHeight(null)),null); 
+                }
         }
+        //niezdrowe jedzenie
+        for(int i=0;i<fFood2.length;i++){
+            fFood2[i].calculatePathPos(GPars.MoveMODE=1);
+                if(!fFood2[i].hit){
+                    g.drawImage(fFood2[i].icon,fFood2[i].currX+50,fFood2[i].currY+80,(int)(fFood2[i].ikona.getWidth(null) ), (int)(fFood2[i].ikona.getHeight(null)),null); 
+                }
+            }
+        
               
         //Ustaw kolor dolnego paska Menu i narysuj pasek
         g.setColor(new Color(250,224,171));
         g.fillRect(0, 800, 1280, 100);
+        
+        //Informacja o liczbie kalorii do zdobycia
+        g.drawImage(GPars.ilekalorii, 785, 15, null);  
              
+        //pobieranie z pliku i wyświetlanie liczby kalorii do zdobycia
+          try {
+            Scanner odczyt = new Scanner(new File("zapis_zapotrzebowania kalorycznego.txt"));
+            String zdanie = odczyt.nextLine();
+	    LDoZdobycia= new JLabel(zdanie);
+            LDoZdobycia.setBounds(890,35,200,100);
+            LDoZdobycia.setForeground(Color.RED);
+            LDoZdobycia.setFont(new Font("Trebuchet MS", Font.PLAIN, 40));
+            add(LDoZdobycia);
+            String dozdobycia = LDoZdobycia.getText();
+            kalorie = Double.parseDouble(LDoZdobycia.getText());
+            
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(Dane.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
         //Napisy w pasku Menu
         
         LPoziom= new JLabel("POZIOM "+gStatus.level);
@@ -130,7 +173,15 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener  {
         LPoziom.setFont(new Font("Trebuchet MS", Font.PLAIN, 40));
         add(LPoziom);
         
-        LKalorie= new JLabel("KALORIE "+gStatus.points);
+        //Ustaw kolor napisu kalorii
+        g.setColor(new Color(12,203,107));;
+        
+        //Ustaw czcionki do wypelnienia paska Menu
+        g.setFont(menuFont);
+        
+        //wyswietlanie liczby zdobytych kalorii
+        g.drawString(""+gStatus.points,600, 845);
+        LKalorie= new JLabel("KALORIE ");
         LKalorie.setBounds(400,785,200,100);
         LKalorie.setForeground(Color.BLACK);
         LKalorie.setFont(new Font("Trebuchet MS", Font.PLAIN, 40));
@@ -138,27 +189,22 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener  {
         
         //ikona opisujaca liczbe zyc        
         g.drawImage(GPars.zycia, 700, 772, null);
-        //wyswietlanie liczby zyc
-        LZycia= new JLabel(":"+gStatus.liczbazyc);
+        
+        //Ustaw kolor napisu liczby żyć
+        g.setColor(new Color(252,79,54));;
+        
+        //wyswietlanie liczby dostepnych zyc
+        g.drawString(""+gStatus.liczbazyc,825, 845);
+        LZycia= new JLabel(":");
         LZycia.setBounds(800,785,200,100);
         LZycia.setForeground(Color.BLACK);
         LZycia.setFont(new Font("Trebuchet MS", Font.PLAIN, 40));
         add(LZycia);
+        
         //wyswietlanie logo w rogu gry        
         g.drawImage(GPars.minilogo, 990, 750, null);
         
-        
-        // Przycisk Menu
-        setLayout(null);
-        JButton button_menu= new JButton("MENU");
-        button_menu.setBackground(new Color(250,224,120));
-        button_menu.setForeground(Color.BLACK);
-        button_menu.setFont(new Font("Trebuchet MS", Font.BOLD, 30));
-        button_menu.setBounds(1000, 800, 200, 100);
-        add(button_menu);
-        
-         }//
-      
+    }
     
     @Override
     public void actionPerformed(ActionEvent e) {
@@ -225,25 +271,29 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener  {
     
     private void restartGame(){
         gStatus.resetPoints();
-        GPars.startTime=System.currentTimeMillis();
+        
+        
         GPars.pause=false;
-        int offset=sWidth/objectsInLine; 
+        int offset=1200/objectsInLine; 
         int inLine=0;    
         int yLine=0;
-        for(int i=0; i<GPars.noOfObjects;i++){
+        for(int i=0; i<3;i++){
          
             fFood[i]=new FlyingFood((((inLine%objectsInLine)+1)*offset)-GPars.food[(i%GPars.food.length)].getWidth(null),0,100,0.0025,GPars.food);
-            fFood[i].setScreenSize(sWidth, sHeight);
-
+            fFood[i].setScreenSize(1200, 900);
+            
+            fFood2[i]=new FlyingFood((((inLine%objectsInLine2)+1)*offset)-GPars.fastfood[(i%GPars.fastfood.length)].getWidth(null),0,100,0.0025,GPars.fastfood);
+            fFood2[i].setScreenSize(1200, 900);
+            
+                 
             if(inLine>=objectsInLine){
                 yLine++;
-                inLine%=objectsInLine;
+               
             }
             inLine++;
             fFood[i].setYPos(yLine*shiftBL*-1);
-            
-        }//koniec for i
-        
+            fFood2[i].setYPos(yLine*shiftBL2*-1);
+    }
     }//koniec restartGame()
 
 }//koniec klasy GamePanel
