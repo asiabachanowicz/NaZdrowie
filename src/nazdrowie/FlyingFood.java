@@ -25,8 +25,12 @@ public class FlyingFood {
     public int width;
     /** Wysokosc ikony spadajacego obiektu */
     public int height;
-    /** Krok przesuniecia obiektu z dolu do gory */
+  /** Krok przesuniecia obiektu z dolu do gory -poziom1,4*/
     public int dy;
+      /** Krok przesuniecia obiektu z dolu do gory -poziom2,5 */
+    public int cy;
+     /** Krok przesuniecia obiektu z dolu do gory -poziom3 */
+    public int by;
     /** Kąt w funkcji sinus opisującej ruch spadajcego obiektu */
     private double angle;
     /** Amplituda w funkcji sinus opisujacej ruch spadajacego obiektu */
@@ -42,6 +46,7 @@ public class FlyingFood {
     /** Wysokosc pola graficznego*/
     public int sHeight;
     
+    
     /** Czy trafiono obiektn */
     public boolean hit;
     /** Ikona spadajacego obiektu - zdrowe*/
@@ -49,14 +54,8 @@ public class FlyingFood {
      /** Ikona spadajacego obiektu -niezdrowe*/
     public Image ikona;
     
-    /**
-     * Konstruktor - ustawienie parametrow spadajacych obiektoww, wylosowanie spadajacego obiektu
-     * @param x poczatkowa wspolrzedna x
-     * @param y poczatkowa wspolrzedna y
-     * @param ampl amplituda sinus (ruch spadajacych obiektow)
-     * @param freq czestotliwosc‡ w funkcji sinus
-     * @param images tablica ikon ze spadajacym jedzeniem
-     */
+    // Konstruktor - ustawienie parametrow spadajacych obiektoww, wylosowanie spadajacego obiektu
+     
     public FlyingFood(int x, int y, int ampl, double freq, Image[] images){
         
         //losowanie wspolrzednej x spadajacego obiektu
@@ -68,6 +67,8 @@ public class FlyingFood {
         currY=y;
         //przesuniecie wspolrzednej y dla poszczegolnych poziomow
         this.dy=5;
+        this.cy=10;
+        this.by=15;
        
         //szerokosc/wysokosc pola graficzngo
         sWidth=1200;
@@ -157,7 +158,7 @@ public class FlyingFood {
     public void calculatePathPos(int mode){
         int tmpX=0;
         switch(mode){
-           case 1: //poziom 1
+            case 1: //poziom 1
                    currY=currY+dy;
                    if(currY>sHeight) { 
                        currY=0;
@@ -165,6 +166,24 @@ public class FlyingFood {
                    tmpX=0;
                    currX=x+tmpX;
                     break;
+            case 2: //poziom 2
+                   currY=currY+cy;
+                   if(currY>sHeight) { 
+                       currY=0;
+                   }
+                   tmpX=0;
+                   currX=x+tmpX;
+                    break;
+            
+           case 3://sinus -poziom 3
+                   currY=currY+dy;
+                   if(currY>sHeight) { 
+                       currY=0;
+                   }
+                   tmpX=(int)(ampl*Math.sin(angle*currY));
+                   currX=x+tmpX;
+                   
+                
          default: break;  
         }
         
