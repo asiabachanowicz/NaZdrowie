@@ -3,6 +3,7 @@ package nazdrowie;
 import java.awt.Image;
 import java.awt.Point;
 import java.io.File;
+import java.util.Random;
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
@@ -43,8 +44,10 @@ public class FlyingFood {
     
     /** Czy trafiono obiektn */
     public boolean hit;
-    /** Ikona spadajacego obiektu*/
+    /** Ikona spadajacego obiektu - zdrowe*/
     public Image icon;
+     /** Ikona spadajacego obiektu -niezdrowe*/
+    public Image ikona;
     
     /**
      * Konstruktor - ustawienie parametrow spadajacych obiektoww, wylosowanie spadajacego obiektu
@@ -55,35 +58,49 @@ public class FlyingFood {
      * @param images tablica ikon ze spadajacym jedzeniem
      */
     public FlyingFood(int x, int y, int ampl, double freq, Image[] images){
-        this.x=600;
-        this.y=y;
+        
+        //losowanie wspolrzednej x spadajacego obiektu
+        Random rand = new Random();
+        this.x = rand.nextInt(1100);
+        
+        this.y=0;
         currX=x;
         currY=y;
+        //przesuniecie wspolrzednej y dla poszczegolnych poziomow
         this.dy=5;
+       
+        //szerokosc/wysokosc pola graficzngo
         sWidth=1200;
         sHeight=900;
         hit=false;
         
         this.ampl=ampl;
         this.freq=freq;
-        //losujemy spadajacy obiekt
-        ktoryobiekt=(int)(0.4+Math.random()*images.length);
-        if(ktoryobiekt>=images.length) ktoryobiekt=images.length-1;
+       
+         //losujemy spadajacy obiekt -zdrowe jedzenie
+        
+        int ktoryobiekt=rand.nextInt(24);
+        if(ktoryobiekt>=images.length) ;
         icon=images[ktoryobiekt];
-        width=icon.getWidth(null);
-        height=icon.getHeight(null);
+       
+         //losujemy spadajacy obiekt -niezdrowe jedzenie
+        
+        int ktoryobiekt2=rand.nextInt(24);
+        if(ktoryobiekt2>=images.length) ;
+        ikona=images[ktoryobiekt2];
+        
         //ustawiamy pulsacje w funkcji sinus 2 Pi f
         setOmega(this.freq);
 
         
     }
     /**
-     * Jedzenie trafione - ustaw stan i odtworz dzwiek
+     * Jedzenie trafione - ustaw stan
      */
     public void setHit(){
         if(!hit){
             hit=true;
-            playSound(new File("sounds/eatingsound.wav"));
+            
         }
     }//setHint()
     
@@ -155,39 +172,5 @@ public class FlyingFood {
         
     }//calculatePathPos()
     
-    
-    public boolean containsPoint(int x, int y){
-        
-        if(x>=currX && x<currX+width){
-            if(y>=(sHeight-currY) && y<(sHeight-currY+height)){
-                return true;
-            }
-        }
-        
-        return false;
-    }//containsPoint()
-    
-       
-    
-    /**
-     * Funkcja odtwarzania dźwięku z pliku
-     * @param f - obiekt klasy File reprezentujący ścieżke do pliku MP3
-     */
-    public static synchronized void playSound(final File f) {
-        new Thread(new Runnable() {
-          public void run() {
-            try {
-              Clip clip = AudioSystem.getClip();
-              AudioInputStream inputStream = AudioSystem.getAudioInputStream(f);
-              clip.open(inputStream);
-              clip.start(); 
-            } catch (Exception e) {
-              System.err.println(e.getMessage());
-            }
-          }
-        }).start();
-    }//playSound()
-
-
 }//koniec class FlyingFood
 
