@@ -19,6 +19,8 @@ public class GameWindow extends JFrame{
     Instrukcja instrukcja = new Instrukcja();
     Dane danegracza = new Dane();
     GamePanel nowagra = new GamePanel();
+    Poziom2 poziom2 = new Poziom2();
+    Poziom3 poziom3 = new Poziom3();
     Informacje1 info1 = new Informacje1();
     Informacje2 info2 = new Informacje2();
     Informacje3 info3 = new Informacje3();
@@ -53,6 +55,8 @@ public class GameWindow extends JFrame{
     cardPanel.add(nowagra, "NOWA GRA");
     cardPanel.add(danegracza, "DANE GRACZA");
     cardPanel.add(instrukcja, "INSTRUKCJA");
+    cardPanel.add(poziom2, "POZIOM 2");
+    cardPanel.add(poziom3, "POZIOM 3");
     cardPanel.add(info1, "INFORMACJE O PRODUKTACH1");
     cardPanel.add(info2, "INFORMACJE O PRODUKTACH2");
     cardPanel.add(info3, "INFORMACJE O PRODUKTACH3");
@@ -99,6 +103,25 @@ public class GameWindow extends JFrame{
         }
     });
       
+    
+    poziom2.bMenu.addActionListener(new ActionListener(){
+        
+        @Override
+        public void actionPerformed(ActionEvent e){
+            cl.show(cardPanel, "MENU");
+            
+        }
+    });
+    
+    poziom3.bMenu.addActionListener(new ActionListener(){
+        
+        @Override
+        public void actionPerformed(ActionEvent e){
+            cl.show(cardPanel, "MENU");
+            
+        }
+    });
+    
       instrukcja.bPrzejdzDoMenu.addActionListener(new ActionListener(){
         @Override
         public void actionPerformed(ActionEvent e){
@@ -223,7 +246,22 @@ public class GameWindow extends JFrame{
         }
     });    
        
-        
+         
+       nowagra.bPoziom2.addActionListener(new ActionListener(){
+        @Override
+        public void actionPerformed(ActionEvent e){
+        cl.show(cardPanel, "POZIOM 2");
+            
+        }
+    });    
+       
+        poziom2.bPoziom3.addActionListener(new ActionListener(){
+        @Override
+        public void actionPerformed(ActionEvent e){
+        cl.show(cardPanel, "POZIOM 3");
+            
+        }
+    });    
        
        
     }    
