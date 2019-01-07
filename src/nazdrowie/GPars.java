@@ -11,16 +11,8 @@ import javax.swing.ImageIcon;
  */
  
 public class GPars {
-    /**  Dopuszczalny czas gry   */
-    public static long GAME_TIME=Long.MAX_VALUE;
-    /**  Liczba poziomĂłw gry   */
-    public final static long NO_LEVELS=5;
-    /**  Obraz tla   */
+     /**  Obraz tla   */
     public static Image bgImage;
-    //Tło menu
-    public static Image menubackground;
-       //pasek z liczba kalorii
-    public static Image ilekalorii;
     /**  tlo Menu  */
     public static Image bgMenu;
      /**  Obraz ludzika   */
@@ -31,35 +23,29 @@ public class GPars {
     public static Image logoImage;
     /**  Obraz straty zycia   */
     public static Image zycia;    
-    /**  Tablica obiektow pierwszego planu   */
+    /**  Tablica obiektow pierwszego planu - zdrowe jedzenie */
     public static Image[] food;
     /**  Tablica obiektow pierwszego planu -niezdrowe jedzenie   */
     public static Image[] fastfood;
     /**  Zmienna stanu okreslajaca czy jest przerwa w grze   */
     public static boolean pause=false;
-    /** Zmienna stanu okreslajaca czy wybrano menu*/
-    public static boolean levelPause=false;
-    /** Zmienna pomocnicza okreslajaca czas poczatkowy gry */
-    public static long startTime;
-    /** Zmienna pomocnicza okreslajaca czas ukonczenia aktualnego poziomu */
-    public static double levelTime;
     /** Zmienna pomocnicza okreslajaca aktualny poziom gry */
     public static int MoveMODE=1;
-    /** Zmienna pomocnicza okreslajaca status ukonczonej gry */
-    public static boolean end=false;
-    /** Zmienna pomocnicza okreslajaca max liczbe obiektow pierwszego planu */
-    public static int noOfObjects=6;
     /** Szerokosc pola graficznego gry */
     public static int gWidth=1280;
     /** Wysokosc pola graficznego gry */
     public static int gHeight=900;
-     //informacje o produktach
+    //Tło menu
+    public static Image menubackground;
+    //instrukcja
+    public static Image instrukcja;
+    //informacje o produktach
     public static Image info1;
     public static Image info2;
     public static Image info3;
-    public static Image info4; 
-    //instrukcja
-    public static Image instrukcja;
+    public static Image info4;
+    //pasek z liczba kalorii
+    public static Image ilekalorii;
     
     /**
      * Metoda ladowania poczatkowych zasobow gry

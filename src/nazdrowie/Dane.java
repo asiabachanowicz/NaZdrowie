@@ -66,6 +66,7 @@ public class Dane extends JPanel implements ActionListener {
         GPars.loadInitialImages();
         setLayout(null);
         
+        //pola tekstowe
         LwyswietlInfo1= new JLabel( "WPISZ DANE I KLIKNIJ <OBLICZ>, ABY OBLICZYĆ");
         LwyswietlInfo1.setBounds(283,100,1240,30);
         LwyswietlInfo1.setForeground(Color.BLACK);
@@ -87,6 +88,7 @@ public class Dane extends JPanel implements ActionListener {
         timie= new JTextField();
         timie.setBounds(320,210,640,50);
         add(timie);
+        
         //pobieranie tekstu z pola tekstowego i przypisanie do nowej zmiennej
         String imie = timie.getText();
         timie.setFont(new Font("Trebuchet MS", Font.PLAIN, 23));
@@ -116,6 +118,7 @@ public class Dane extends JPanel implements ActionListener {
         twiek= new JTextField();
         twiek.setBounds(320,410,640,50);
         add(twiek);
+        
         //pobieranie tekstu z pola tekstowego i przypisanie do nowej zmiennej
         String wiek = twiek.getText();
         twiek.setFont(new Font("Trebuchet MS", Font.PLAIN, 23));
@@ -129,6 +132,7 @@ public class Dane extends JPanel implements ActionListener {
         tmasa= new JTextField();
         tmasa.setBounds(320,510,640,50);
         add(tmasa);
+        
         //pobieranie tekstu z pola tekstowego i przypisanie do nowej zmiennej
         String masa = tmasa.getText();
         tmasa.setFont(new Font("Trebuchet MS", Font.PLAIN, 23));
@@ -142,6 +146,7 @@ public class Dane extends JPanel implements ActionListener {
         twzrost= new JTextField();
         twzrost.setBounds(320,610,640,50);
         add(twzrost);
+        
         //pobieranie tekstu z pola tekstowego i przypisanie do nowej zmiennej
         String wzrost = twzrost.getText();
         twzrost.setFont(new Font("Trebuchet MS", Font.PLAIN, 23));
@@ -209,7 +214,6 @@ public class Dane extends JPanel implements ActionListener {
         
         }
      
-       
        //zapis liczby kalorii do pliku
         try {
             PrintWriter zapis= new PrintWriter("zapis_zapotrzebowania kalorycznego.txt");
@@ -218,10 +222,7 @@ public class Dane extends JPanel implements ActionListener {
         } catch (FileNotFoundException ex) {
             Logger.getLogger(Dane.class.getName()).log(Level.SEVERE, null, ex);
         }
-       
-       
       
-        
     }
 
  

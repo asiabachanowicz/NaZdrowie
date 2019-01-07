@@ -2,13 +2,10 @@
 package nazdrowie;
 import java.awt.Image;
 import java.awt.Point;
-import java.io.File;
 import java.util.Random;
-import javax.sound.sampled.AudioInputStream;
-import javax.sound.sampled.AudioSystem;
-import javax.sound.sampled.Clip;
+
 /**
- *
+ *Spadanie elementów
  * @author Asia
  */
 
@@ -37,15 +34,16 @@ public class FlyingFood {
     public int ampl;
     /** Czestotliwosc funkcji sinus opisujacej ruch spadajacego obiektu */
     public double freq;
-    /** Rodzaj spadajacego obiektu*/
+    /** Rodzaj spadajacego obiektu -zdrowe*/
     public int ktoryobiekt;
+    /** Rodzaj spadajacego obiektu -niezdrowe*/
+    public int ktoryobiekt2;
     /** Omega 2Pi*f */
     public final static double w=2*Math.PI;
     /** Szerokosc pola graficznego*/
     public int sWidth;
     /** Wysokosc pola graficznego*/
     public int sHeight;
-    
     
     /** Czy trafiono obiektn */
     public boolean hit;
