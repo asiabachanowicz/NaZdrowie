@@ -1,3 +1,9 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+
 package nazdrowie;
 
 import javax.swing.*;
@@ -21,42 +27,42 @@ import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
 
 /**
- *
+ * Główny obszar graficzny gry - poziom 2
  * @author Asia
  */
 
+
 public class Poziom2 extends JPanel implements ActionListener, KeyListener   {
     
-    //liczba obiektow w linii (zdrowe)
+    /**liczba obiektow w linii (zdrowe) */
     public int objectsInLine;
-    // Liczba obiektow w linii (niezdrowe)
+    /**Liczba obiektow w linii (niezdrowe) */
     public int objectsInLine2;
-    //Przesuniecie liniami ze spadajacymi obiektami (zdrowe)
+    /** Przesuniecie liniami ze spadajacymi obiektami (zdrowe)*/
     public int shiftBL;
-    //Przesuniecie liniami ze spadajacymi obiektami (niezdrowe)
+    /** Przesuniecie liniami ze spadajacymi obiektami (niezdrowe)*/
     public int shiftBL2;
-    //Obiekt reprezentujacy status gry
+    /**Obiekt reprezentujacy status gry */
     public GameStatus gStatus;
-    //Wysokosc paska menu
+    /**Wysokosc paska menu */
     public int barHeight;
-    //Tablica obiektow pierwszego planu - spadajace zdrowe jedzenie 
+    /**Tablica obiektow pierwszego planu - spadajace zdrowe jedzenie  */
     public FlyingFood [] fFood;
-    //Tablica obiektow pierwszego planu - spadajace niezdrowe jedzenie 
+    /**Tablica obiektow pierwszego planu - spadajace niezdrowe jedzenie  */
     public FlyingFood [] fFood2;
-    //Obiekt reprezentujacy parametry gry
+    /**Obiekt reprezentujacy parametry gry */
     public GPars gPars;   
-    //Obiekt reprezentujacy spadające jedzenie
+    /**Obiekt reprezentujacy spadające jedzenie */
     public FlyingFood fFlying;
-    //Czcionki
+    /**Czcionki */
     public Font menuFont;
     public Font menuFont2;
-   //zmienna bool okreslajaca czy gre wygrano/przegrano
+    /**Czy gre wygrano/przegrano*/
     public boolean przegrano=false;
     public boolean wygrano=false;
-    //zmienna przechowujaca obliczone dzienne zapotrzebowanie na kalorie
+    /**Obliczone dzienne zapotrzebowanie na kalorie */
     public double kalorie;
-    
-    //zadeklarowane pola tekstowe, buttony
+    /**Pola tekstowe, buttony */
     JLabel LPoziom;
     JLabel LKalorie;
     JLabel LZycia;
@@ -70,18 +76,19 @@ public class Poziom2 extends JPanel implements ActionListener, KeyListener   {
     JButton bPoziom3;
   
     Timer t = new Timer (5, this);
-    //wspolrzedne ludzika
+    /** Początkowe wspolrzedne ludzika, przesunięcie współrzędnych*/
     public double x=525, y=550, velx=0, vely=0;
    
-     //Konstruktor klasy pola graficznego gry.
-     
+    /**
+     * Konstruktor klasy pola graficznego gry.
+     * Ustawienia początkowe oraz ładowanie zasobów
+     * Ponadto dodanie obsługi zdarzeń w polu graficznym gry
+     */
     public Poziom2(){
         
         gStatus=new GameStatus();
-        gStatus.reset();
         gStatus.level=2;
         GPars.MoveMODE=2;
-        
         t.start();
         addKeyListener(this);
         setFocusable(true);
@@ -121,7 +128,10 @@ public class Poziom2 extends JPanel implements ActionListener, KeyListener   {
        
     }//koniec GamePanel()
    
-    //Odrysowanie panelu
+    /**
+     * Odrysowanie panelu - własne wypełnienie pola graficznego gry
+     * @param gs 
+     */
     
     public void paintComponent(Graphics gs){
         Graphics2D g=(Graphics2D)gs;
@@ -194,7 +204,9 @@ public class Poziom2 extends JPanel implements ActionListener, KeyListener   {
         //Informacja o liczbie kalorii do zdobycia
         g.drawImage(GPars.ilekalorii, 785, 15, null);  
         
-        //pobieranie z pliku i wyświetlanie liczby kalorii do zdobycia
+     /**
+     * Pobieranie z pliku i wyświetlanie liczby kalorii do zdobycia
+     */
           try {
             Scanner odczyt = new Scanner(new File("zapis_zapotrzebowania kalorycznego.txt"));
             String zdanie = odczyt.nextLine();
@@ -327,6 +339,7 @@ public class Poziom2 extends JPanel implements ActionListener, KeyListener   {
     
     @Override
     public void actionPerformed(ActionEvent e) {
+    
       repaint ();
       requestFocus();
       
@@ -335,25 +348,35 @@ public class Poziom2 extends JPanel implements ActionListener, KeyListener   {
         x += velx;
       }
     }
-               
+    /**
+     *Metoda opisująca co się zdarzy gdy klikniemy strzałkę w lewo
+     */           
        public void left() {
            vely= 0;
            velx= -7;
     
         }
-       
+    /**
+     *Metoda opisująca co się zdarzy gdy klikniemy strzałkę w prawo
+     */      
        public void right() {
 
            vely= 0;
            velx= 7;
 
 }
+     /**
+     *Metoda opisująca ograniczenie sterowania w prawo
+     */   
        public void rightSTOP() {
 
            vely= 0;
            velx= 0;
 
 }
+     /**
+     *Metoda opisująca ograniczenie sterowania w lewo
+     */  
        public void leftSTOP() {
 
            vely= 0;
@@ -393,14 +416,15 @@ public class Poziom2 extends JPanel implements ActionListener, KeyListener   {
        }
        }       
        
-       
-       
-       
+    /**
+     * Restart gry - ustawienia parametrĂłw oraz obiektĂłw pierwszego planu
+     * 
+     */   
+      
    private void restartGame(){
         gStatus.resetPoints();
         
         
-        GPars.pause=false;
         int offset=1200/objectsInLine; 
         int inLine=0;    
         int yLine=0;
@@ -425,8 +449,11 @@ public class Poziom2 extends JPanel implements ActionListener, KeyListener   {
         
               
     }
-
-   //Funkcja odtwarzania dźwięku z pliku
+    /**
+     * Funkcja odtwarzania dźwięku z pliku
+     * @param f - obiekt klasy File reprezentujący ścieżkę do pliku
+     */ 
+   
      
     public static synchronized void playSound(final File f) {
         new Thread(new Runnable() {

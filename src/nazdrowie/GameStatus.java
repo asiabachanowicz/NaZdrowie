@@ -1,4 +1,8 @@
-
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package nazdrowie;
 
 /**
@@ -6,22 +10,22 @@ package nazdrowie;
  * @author Asia
  */
 public class GameStatus {
-    //liczba zdobytych punktow na danym poziomie
+    /** Liczba zgromadzonych punktów na danynm poziomie*/
     public int points;
-    //numer poziomu
+    /** Numer poziomu */
     public int level;
-    //liczba zyc
+    /** Liczba żyć */
     public int liczbazyc=3;
     
     
-  //zeruj parametry gry
+  /** Zeruj parametry gry */
     public void reset(){
         points=0;
         level=1;
        
     }
     
-   //zeruj liczbe punktow
+   /** Zeruj liczbę punktów */
     public void resetPoints(){
         points=0;
     }

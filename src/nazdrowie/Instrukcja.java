@@ -1,4 +1,8 @@
-
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package nazdrowie;
 
 import java.awt.Color;
@@ -20,9 +24,12 @@ public class Instrukcja  extends JPanel   {
     JButton bPrzejdzDoMenu;
     BufferedImage instrukcja;
     
+    /**
+     * Konstruktor - wstawienie buttonów, instrukcji w formie obrazu jpg
+     */
     public Instrukcja() {
         
-                
+        /**Ladowanie początkowych zasobów gry */         
         GPars.loadInitialImages();
         setLayout(null);
  
@@ -35,7 +42,11 @@ public class Instrukcja  extends JPanel   {
         
                 
     }
-    
+    /**
+     * Nadpisz metodę odpowiedzialną za odrysowanie panelu - własne wypełnienie 
+     * pola graficznego gry, zgodnie z wybraną treścią
+     * @param gs 
+     */
         protected void paintComponent(Graphics gs){
         Graphics2D g=(Graphics2D)gs;
         //Ustaw tryb lepszej jakości grafiki (wygładzanie/antyaliasing)

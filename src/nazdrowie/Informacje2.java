@@ -27,8 +27,13 @@ public class Informacje2 extends JPanel  {
     JButton bPoprzedniaStrona;
     BufferedImage background;
     
+    
+     /**
+     * Konstruktor - wstawienie buttonów, informacji o produktach w formie obrazu jpg
+     */
     public Informacje2(){
-                        
+         
+        /**Ladowanie początkowych zasobów gry */ 
         GPars.loadInitialImages();
         setLayout(null);
  
@@ -58,6 +63,11 @@ public class Informacje2 extends JPanel  {
         
 }
     
+    /**
+     * Nadpisz metodę odpowiedzialną za odrysowanie panelu - własne wypełnienie 
+     * pola graficznego gry, zgodnie z wybraną treścią
+     * @param gs 
+     */
    protected void paintComponent(Graphics gs){
         Graphics2D g=(Graphics2D)gs;
         //Ustaw tryb lepszej jakości grafiki (wygładzanie/antyaliasing)

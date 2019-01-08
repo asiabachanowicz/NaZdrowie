@@ -1,4 +1,8 @@
-
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package nazdrowie;
 
 import java.awt.event.ActionEvent;
@@ -10,29 +14,20 @@ import java.io.IOException;
 
 
 /**
- *
+ * Interaktywna gra Komputerowa „Na zdrowie!”
+ * pokazująca różnice pomiędzy zdrowym a niezdrowym odżywianiem
  * @author Asia
  */
 public class NaZdrowie extends JFrame implements ActionListener {
-
-      
-       
+  
     public NaZdrowie() throws IOException{
      
-        
     }
     
-    
+    /**
+     * Metoda uruchamia grę.
+     */
     public static void main(String[] args) throws IOException {
-        
-        /*
-        //wyswietl Menu
-        MenuPanel menuglowne=new MenuPanel();
-        menuglowne.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        menuglowne.setVisible(true);
-        */
-        
-        
         
             //otwarcie okna gry
             int gameWidth=1200;

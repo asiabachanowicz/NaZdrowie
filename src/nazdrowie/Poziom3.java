@@ -383,7 +383,6 @@ public class Poziom3 extends JPanel implements ActionListener, KeyListener   {
         gStatus.resetPoints();
         
         
-        GPars.pause=false;
         int offset=1200/objectsInLine; 
         int inLine=0;    
         int yLine=0;

@@ -1,4 +1,8 @@
-
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package nazdrowie;
 import java.awt.Image;
 import javax.swing.ImageIcon;
@@ -13,7 +17,7 @@ import javax.swing.ImageIcon;
 public class GPars {
      /**  Obraz tla   */
     public static Image bgImage;
-    /**  tlo Menu  */
+    /**  tło Menu  */
     public static Image bgMenu;
      /**  Obraz ludzika   */
     public static Image body;
@@ -27,24 +31,22 @@ public class GPars {
     public static Image[] food;
     /**  Tablica obiektow pierwszego planu -niezdrowe jedzenie   */
     public static Image[] fastfood;
-    /**  Zmienna stanu okreslajaca czy jest przerwa w grze   */
-    public static boolean pause=false;
     /** Zmienna pomocnicza okreslajaca aktualny poziom gry */
     public static int MoveMODE=1;
     /** Szerokosc pola graficznego gry */
     public static int gWidth=1280;
     /** Wysokosc pola graficznego gry */
     public static int gHeight=900;
-    //Tło menu
+    /** Tło Menu */
     public static Image menubackground;
-    //instrukcja
+    /** Instrukcja */
     public static Image instrukcja;
-    //informacje o produktach
+    /** Informacje o produktach */
     public static Image info1;
     public static Image info2;
     public static Image info3;
     public static Image info4;
-    //pasek z liczba kalorii
+    /** Pasek z liczbą kalorii */
     public static Image ilekalorii;
     
     /**

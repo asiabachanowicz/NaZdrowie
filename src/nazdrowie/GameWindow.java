@@ -1,5 +1,9 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package nazdrowie;
-
 
 import java.awt.CardLayout;
 import java.awt.Toolkit;
@@ -29,18 +33,24 @@ public class GameWindow extends JFrame{
     JPanel cardPanel;
     CardLayout cl;
     
-   
+    /**
+     * Główny konstruktor klasy - ustawienie parametrów i rozpoczęcia akcji
+     * @param width szerokość okna
+     * @param height wysokość okna
+     * @param x pozycja x lewego górnego narożnika okna
+     * @param y pozycja y lewego górnego narożnika okna
+     */
     public GameWindow(int width, int height, int x, int y){
         
         
-    super();
+    super(); //wywołaj kontruktor klasy nadrzędnej - utwórz okno
     this.nowagra = new GamePanel();
-    setSize(width, height);
-    setLocation(x,y);
+    setSize(width, height); // wymiary okna
+    setLocation(x,y); //ustaw pozycję okna
     this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     setResizable(false); //zablokuj możliwość zmian rozmiaru okna
     setUndecorated(true); //ukryj ramke okna i przyciski kontrolne
-    setVisible(true);
+    setVisible(true); // pokaż okno
     
     panels();  
     initGUI();
@@ -266,9 +276,11 @@ public class GameWindow extends JFrame{
        
     }    
     
-
-     // Utworz interfejs graficzny uzytkownika
- 
+ /**
+     * Utwórz interfejs graficzny użytkownika
+     * @param width szerokość okna
+     * @param height wysokość okna
+     */
     private void initGUI(){
         Toolkit tk = Toolkit.getDefaultToolkit();
        
