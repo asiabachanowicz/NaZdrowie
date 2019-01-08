@@ -21,8 +21,7 @@ public class GameStatus {
   /** Zeruj parametry gry */
     public void reset(){
         points=0;
-        level=1;
-       
+        liczbazyc=3;
     }
     
    /** Zeruj liczbę punktów */

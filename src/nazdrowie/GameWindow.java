@@ -29,7 +29,7 @@ public class GameWindow extends JFrame{
     Informacje2 info2 = new Informacje2();
     Informacje3 info3 = new Informacje3();
     Informacje4 info4 = new Informacje4();
-    
+
     JPanel cardPanel;
     CardLayout cl;
     
@@ -44,7 +44,6 @@ public class GameWindow extends JFrame{
         
         
     super(); //wywołaj kontruktor klasy nadrzędnej - utwórz okno
-    this.nowagra = new GamePanel();
     setSize(width, height); // wymiary okna
     setLocation(x,y); //ustaw pozycję okna
     this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -242,6 +241,9 @@ public class GameWindow extends JFrame{
        danegracza.bGraj.addActionListener(new ActionListener(){
         @Override
         public void actionPerformed(ActionEvent e){
+        nowagra.restartGame();
+        nowagra.przegrano=false;
+        nowagra.wygrano=false;
         cl.show(cardPanel, "NOWA GRA");
             
         }
@@ -260,6 +262,7 @@ public class GameWindow extends JFrame{
        nowagra.bPoziom2.addActionListener(new ActionListener(){
         @Override
         public void actionPerformed(ActionEvent e){
+        poziom2.restartGame();
         cl.show(cardPanel, "POZIOM 2");
             
         }
@@ -268,6 +271,7 @@ public class GameWindow extends JFrame{
         poziom2.bPoziom3.addActionListener(new ActionListener(){
         @Override
         public void actionPerformed(ActionEvent e){
+        poziom3.restartGame();
         cl.show(cardPanel, "POZIOM 3");
             
         }

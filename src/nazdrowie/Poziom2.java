@@ -67,11 +67,6 @@ public class Poziom2 extends JPanel implements ActionListener, KeyListener   {
     JLabel LKalorie;
     JLabel LZycia;
     JLabel LDoZdobycia;
-    JLabel LKoniecGry;
-    JLabel LKoniecGry2;
-    JLabel LKoniecGry3;
-    JLabel LKoniecGry4;
-    JLabel LKoniecGry5;
     JButton bMenu;
     JButton bPoziom3;
   
@@ -244,21 +239,18 @@ public class Poziom2 extends JPanel implements ActionListener, KeyListener   {
             }
         }
             
-        //koniec gry gdy stracono zycia
+         //koniec gry gdy stracono zycia
         if(gStatus.liczbazyc==0 ){
-            //napisy po przegraniu gry
-            LKoniecGry= new JLabel("KONIEC GRY");
-            LKoniecGry.setBounds(400,250,1000,300);
-            LKoniecGry.setForeground(Color.red);
-            LKoniecGry.setFont(new Font("Trebuchet MS", Font.PLAIN, 70));
-            add(LKoniecGry);
-
-            LKoniecGry4= new JLabel("ZAJRZYJ DO INFORMACJI O PRODUKTACH!");
-            LKoniecGry4.setBounds(220,350,1200,300);
-            LKoniecGry4.setForeground(Color.black);
-            LKoniecGry4.setFont(new Font("Trebuchet MS", Font.PLAIN, 40));
-            add(LKoniecGry4);
             
+            //napisy po przegraniu gry
+            g.setColor(Color.red);;
+            g.setFont(new Font("Trebuchet MS", Font.PLAIN, 70));
+            g.drawString("KONIEC GRY",400, 350);
+            
+            g.setColor(Color.black);;
+            g.setFont(new Font("Trebuchet MS", Font.PLAIN, 40));
+            g.drawString("ZAJRZYJ DO INFORMACJI O PRODUKTACH!",220, 450);
+           
             przegrano=true;
             wygrano=false;
         }
@@ -266,34 +258,23 @@ public class Poziom2 extends JPanel implements ActionListener, KeyListener   {
         //gdy zdobyto dzienne zapotrzebowanie - wygrana
         if(gStatus.points>=kalorie){
            //napisy gry wygrano 
-           LKoniecGry= new JLabel("WYGRAŁEŚ!");
-           LKoniecGry.setBounds(415,280,370,80);
-           LKoniecGry.setForeground(Color.red);
-           LKoniecGry.setFont(new Font("Trebuchet MS", Font.PLAIN, 70));
-           add(LKoniecGry);
-
-           LKoniecGry2= new JLabel("ZDOBYŁEŚ SWOJE DZIENNE ZAPOTRZEBOWANIE NA KALORIE");
-           LKoniecGry2.setBounds(70,380,1200,50);
-           LKoniecGry2.setForeground(new Color(5,205,105));
-           LKoniecGry2.setFont(new Font("Trebuchet MS", Font.PLAIN, 40));
-           add(LKoniecGry2);
-
-           LKoniecGry3= new JLabel(" " +gStatus.points+ " KCAL");
-           LKoniecGry3.setBounds(505,440,400,50);
-           LKoniecGry3.setForeground(new Color(5,205,105));
-           LKoniecGry3.setFont(new Font("Trebuchet MS", Font.PLAIN, 40));
-           add(LKoniecGry3);
-
-           LKoniecGry5= new JLabel("PRZEJDŹ DO POZIOMU 3");
-           LKoniecGry5.setBounds(385,500,800,50);
-           LKoniecGry5.setForeground(Color.red);
-           LKoniecGry5.setFont(new Font("Trebuchet MS", Font.PLAIN, 40));
-           add(LKoniecGry5);
-
+            g.setColor(Color.red);;
+            g.setFont(new Font("Trebuchet MS", Font.PLAIN, 70));
+            g.drawString("WYGRAŁEŚ!",415, 280);
+            
+            g.setColor(new Color(5,205,105));
+            g.setFont(new Font("Trebuchet MS", Font.PLAIN, 40));
+            g.drawString("ZDOBYŁEŚ SWOJE DZIENNE ZAPOTRZEBOWANIE NA KALORIE",70, 380);
+            
+            g.setFont(new Font("Trebuchet MS", Font.PLAIN, 40));
+            g.drawString(" " +gStatus.points+ " KCAL",505, 440);
+            
+            g.setFont(new Font("Trebuchet MS", Font.PLAIN, 40));
+            g.drawString("PRZEJDŹ DO POZIOMU 3",385, 500);
+            
            wygrano=true;
            przegrano=false;
         }
-
         
         //Napisy w pasku Menu    
         //wyswietlanie poziomu
@@ -421,10 +402,13 @@ public class Poziom2 extends JPanel implements ActionListener, KeyListener   {
      * 
      */   
       
-   private void restartGame(){
+   public void restartGame(){
+       
         gStatus.resetPoints();
-        
-        
+        gStatus.reset();
+        gStatus.level=2;
+        przegrano=false;
+        wygrano=false;
         int offset=1200/objectsInLine; 
         int inLine=0;    
         int yLine=0;
@@ -446,9 +430,7 @@ public class Poziom2 extends JPanel implements ActionListener, KeyListener   {
             fFood2[i].setYPos(yLine*shiftBL2*-1);
            
         }
-        
-              
-    }
+   }
     /**
      * Funkcja odtwarzania dźwięku z pliku
      * @param f - obiekt klasy File reprezentujący ścieżkę do pliku
