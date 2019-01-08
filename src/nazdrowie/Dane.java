@@ -32,37 +32,36 @@ import javax.swing.*;
 public class Dane extends JPanel implements ActionListener {
     
      /** Pola tekstowe (wpisywanie danych) */
-    JTextField timie;
-    JTextField twiek;
-    JTextField tmasa;
-    JTextField twzrost;
-    JTextField tliczbakalorii;
+    JTextField tname;
+    JTextField tage;
+    JTextField tweight;
+    JTextField theight;
+    JTextField tcalories;
      /** Buttony */
-    JButton bPrzejdzDoMenu;
-    JButton bOblicz;
-    JButton bGraj;
+    JButton bMenu;
+    JButton bCalculate;
+    JButton bPlay;
      /** Pola tekstowe */
-    JLabel LwyswietlImie;
-    JLabel LwyswietlPlec;
-    JLabel LwyswietlWiek;
-    JLabel LwyswietlMasa;
-    JLabel LwyswietlWzrost;
-    JLabel LwyswietlInfo1;
-    JLabel LwyswietlInfo2;
-    JLabel Ldziennezapotrzebowanie;
+    JLabel LName;
+    JLabel LSex;
+    JLabel LAge;
+    JLabel LWeight;
+    JLabel LHeight;
+    JLabel LInfo1;
+    JLabel LInfo2;
+    JLabel LDailyCalories;
      /** Lista wyboru */
-    JComboBox Bplec;
+    JComboBox BSex;
      /** Zmienne do obliczeń poprane z pól tekstowych */
-    String imie;
-    String plec;
-    String wiek;
-    String masa;
-    String wzrost;
+    String name;
+    String age;
+    String weight;
+    String height;
      /** Zmienne do oblcizeń zamienione na double */
-    double podanamasa;
-    double podanywzrost;
-    double podanywiek;
-    public double liczbakalorii;
+    double givenweight;
+    double givenheight;
+    double givenage;
+    public double numberofcalories;
      /** Obraz tła */
     BufferedImage background;
     
@@ -77,136 +76,136 @@ public class Dane extends JPanel implements ActionListener {
         setLayout(null);
         
         /** Pole tekstowe */
-        LwyswietlInfo1= new JLabel( "WPISZ DANE I KLIKNIJ <OBLICZ>, ABY OBLICZYĆ");
-        LwyswietlInfo1.setBounds(283,100,1240,30);
-        LwyswietlInfo1.setForeground(Color.BLACK);
-        LwyswietlInfo1.setFont(new Font("Trebuchet MS", Font.PLAIN, 30));
-        add(LwyswietlInfo1);
+        LInfo1= new JLabel( "WPISZ DANE I KLIKNIJ <OBLICZ>, ABY OBLICZYĆ");
+        LInfo1.setBounds(283,100,1240,30);
+        LInfo1.setForeground(Color.BLACK);
+        LInfo1.setFont(new Font("Trebuchet MS", Font.PLAIN, 30));
+        add(LInfo1);
         
         /** Pole tekstowe */
-        LwyswietlInfo2= new JLabel( "DZIENNE ZAPOTRZEBOWANIE  NA KALORIE");
-        LwyswietlInfo2.setBounds(320,135,1240,30);
-        LwyswietlInfo2.setForeground(Color.BLACK);
-        LwyswietlInfo2.setFont(new Font("Trebuchet MS", Font.PLAIN, 30));
-        add(LwyswietlInfo2);
+        LInfo2= new JLabel( "DZIENNE ZAPOTRZEBOWANIE  NA KALORIE");
+        LInfo2.setBounds(320,135,1240,30);
+        LInfo2.setForeground(Color.BLACK);
+        LInfo2.setFont(new Font("Trebuchet MS", Font.PLAIN, 30));
+        add(LInfo2);
         
         /** Pole tekstowe */
-        LwyswietlImie= new JLabel("IMIĘ:");
-        LwyswietlImie.setBounds(250,215,100,30);
-        LwyswietlImie.setForeground(Color.BLACK);
-        LwyswietlImie.setFont(new Font("Trebuchet MS", Font.PLAIN, 23));
-        add(LwyswietlImie);
+        LName= new JLabel("IMIĘ:");
+        LName.setBounds(250,215,100,30);
+        LName.setForeground(Color.BLACK);
+        LName.setFont(new Font("Trebuchet MS", Font.PLAIN, 23));
+        add(LName);
         
         /** Pole tekstowe (wpisywanie danych)*/
-        timie= new JTextField();
-        timie.setBounds(320,210,640,50);
-        add(timie);
+        tname= new JTextField();
+        tname.setBounds(320,210,640,50);
+        add(tname);
         
         /** Pobieranie tekstu z pola tekstowego */
-        String imie = timie.getText();
-        timie.setFont(new Font("Trebuchet MS", Font.PLAIN, 23));
+        String name = tname.getText();
+        tname.setFont(new Font("Trebuchet MS", Font.PLAIN, 23));
         
          /** Pole tekstowe */
-        LwyswietlPlec= new JLabel("PŁEĆ:");
-        LwyswietlPlec.setBounds(242,315,100,30);
-        LwyswietlPlec.setForeground(Color.BLACK);
-        LwyswietlPlec.setFont(new Font("Trebuchet MS", Font.PLAIN, 23));
-        add(LwyswietlPlec);
+        LSex= new JLabel("PŁEĆ:");
+        LSex.setBounds(242,315,100,30);
+        LSex.setForeground(Color.BLACK);
+        LSex.setFont(new Font("Trebuchet MS", Font.PLAIN, 23));
+        add(LSex);
         
          /** Lista */
-        Bplec = new JComboBox ();
-        Bplec.addItem("Kobieta");
-        Bplec.setSelectedIndex(0);
-        Bplec.addItem("Mężczyzna");
-        Bplec.setBounds(320,310,640,50);
-        add(Bplec);
-        Bplec.setFont(new Font("Trebuchet MS", Font.PLAIN, 23));
+        BSex = new JComboBox ();
+        BSex.addItem("Kobieta");
+        BSex.setSelectedIndex(0);
+        BSex.addItem("Mężczyzna");
+        BSex.setBounds(320,310,640,50);
+        add(BSex);
+        BSex.setFont(new Font("Trebuchet MS", Font.PLAIN, 23));
         
          /** Pole tekstowe*/
-        LwyswietlWiek= new JLabel("WIEK:");
-        LwyswietlWiek.setBounds(242,415,100,30);
-        LwyswietlWiek.setForeground(Color.BLACK);
-        LwyswietlWiek.setFont(new Font("Trebuchet MS", Font.PLAIN, 23));
-        add(LwyswietlWiek);
+        LAge= new JLabel("WIEK:");
+        LAge.setBounds(242,415,100,30);
+        LAge.setForeground(Color.BLACK);
+        LAge.setFont(new Font("Trebuchet MS", Font.PLAIN, 23));
+        add(LAge);
         
         /** Pole tekstowe (wpisywanie danych)*/
-        twiek= new JTextField();
-        twiek.setBounds(320,410,640,50);
-        add(twiek);
+        tage= new JTextField();
+        tage.setBounds(320,410,640,50);
+        add(tage);
         
          /** Pobieranie tekstu z pola tekstowego */
-        String wiek = twiek.getText();
-        twiek.setFont(new Font("Trebuchet MS", Font.PLAIN, 23));
+        String age = tage.getText();
+        tage.setFont(new Font("Trebuchet MS", Font.PLAIN, 23));
         
         /** Pole tekstowe*/
-        LwyswietlMasa= new JLabel("MASA:");
-        LwyswietlMasa.setBounds(242,515,100,30);
-        LwyswietlMasa.setForeground(Color.BLACK);
-        LwyswietlMasa.setFont(new Font("Trebuchet MS", Font.PLAIN, 23));
-        add(LwyswietlMasa);
+        LWeight= new JLabel("MASA:");
+        LWeight.setBounds(242,515,100,30);
+        LWeight.setForeground(Color.BLACK);
+        LWeight.setFont(new Font("Trebuchet MS", Font.PLAIN, 23));
+        add(LWeight);
         
         /** Pole tekstowe (wpisywanie danych)*/
-        tmasa= new JTextField();
-        tmasa.setBounds(320,510,640,50);
-        add(tmasa);
+        tweight= new JTextField();
+        tweight.setBounds(320,510,640,50);
+        add(tweight);
         
          /** Pobieranie tekstu z pola tekstowego */
-        String masa = tmasa.getText();
-        tmasa.setFont(new Font("Trebuchet MS", Font.PLAIN, 23));
+        String weight = tweight.getText();
+        tweight.setFont(new Font("Trebuchet MS", Font.PLAIN, 23));
         
         /** Pole tekstowe*/
-        LwyswietlWzrost= new JLabel("WZROST:");
-        LwyswietlWzrost.setBounds(222,615,200,30);
-        LwyswietlWzrost.setForeground(Color.BLACK);
-        LwyswietlWzrost.setFont(new Font("Trebuchet MS", Font.PLAIN, 23));
-        add(LwyswietlWzrost);
+        LHeight= new JLabel("WZROST:");
+        LHeight.setBounds(222,615,200,30);
+        LHeight.setForeground(Color.BLACK);
+        LHeight.setFont(new Font("Trebuchet MS", Font.PLAIN, 23));
+        add(LHeight);
         
         /** Pole tekstowe (wpisywanie danych)*/
-        twzrost= new JTextField();
-        twzrost.setBounds(320,610,640,50);
-        add(twzrost);
+        theight= new JTextField();
+        theight.setBounds(320,610,640,50);
+        add(theight);
         
          /** Pobieranie tekstu z pola tekstowego */
-        String wzrost = twzrost.getText();
-        twzrost.setFont(new Font("Trebuchet MS", Font.PLAIN, 23));
+        String height = theight.getText();
+        theight.setFont(new Font("Trebuchet MS", Font.PLAIN, 23));
         
         /** Button przejdz do menu*/
-        bPrzejdzDoMenu=new JButton ("MENU");
-        bPrzejdzDoMenu.setBounds(755,760,200,70);
-        bPrzejdzDoMenu.setBackground(new Color(250,224,120));
-        bPrzejdzDoMenu.setForeground(Color.BLACK);
-        bPrzejdzDoMenu.setFont(new Font("Trebuchet MS", Font.BOLD, 25));
-        add(bPrzejdzDoMenu);
+        bMenu=new JButton ("MENU");
+        bMenu.setBounds(755,760,200,70);
+        bMenu.setBackground(new Color(250,224,120));
+        bMenu.setForeground(Color.BLACK);
+        bMenu.setFont(new Font("Trebuchet MS", Font.BOLD, 25));
+        add(bMenu);
         
         /** Button graj*/
-        bGraj=new JButton ("GRAJ");
-        bGraj.setBounds(505,760,200,70);
-        bGraj.setBackground(new Color(250,224,120));
-        bGraj.setForeground(Color.BLACK);
-        bGraj.setFont(new Font("Trebuchet MS", Font.BOLD, 25));
-        add(bGraj);
+        bPlay=new JButton ("GRAJ");
+        bPlay.setBounds(505,760,200,70);
+        bPlay.setBackground(new Color(250,224,120));
+        bPlay.setForeground(Color.BLACK);
+        bPlay.setFont(new Font("Trebuchet MS", Font.BOLD, 25));
+        add(bPlay);
               
          /** Pole tekstowe*/
-        Ldziennezapotrzebowanie= new JLabel( "TWOJE DZIENNE ZAPOTRZEBOWANIE NA KALORIE TO: ");
-        Ldziennezapotrzebowanie.setBounds(250,690,1240,30);
-        Ldziennezapotrzebowanie.setForeground(Color.BLACK);
-        Ldziennezapotrzebowanie.setFont(new Font("Trebuchet MS", Font.PLAIN, 20));
-        add(Ldziennezapotrzebowanie);
+        LDailyCalories= new JLabel( "TWOJE DZIENNE ZAPOTRZEBOWANIE NA KALORIE TO: ");
+        LDailyCalories.setBounds(250,690,1240,30);
+        LDailyCalories.setForeground(Color.BLACK);
+        LDailyCalories.setFont(new Font("Trebuchet MS", Font.PLAIN, 20));
+        add(LDailyCalories);
       
         /** Pole tekstowe (wpisywanie danych)*/
-        tliczbakalorii= new JTextField();
-        tliczbakalorii.setBounds(735,680,70,50);
-        add(tliczbakalorii);
-        tliczbakalorii.setFont(new Font("Trebuchet MS", Font.PLAIN, 23));
+        tcalories= new JTextField();
+        tcalories.setBounds(735,680,70,50);
+        add(tcalories);
+        tcalories.setFont(new Font("Trebuchet MS", Font.PLAIN, 23));
         
          /** Button oblicz*/
-        bOblicz=new JButton ("OBLICZ");
-        bOblicz.setBounds(255,760,200,70);
-        bOblicz.setBackground(new Color(250,224,120));
-        bOblicz.setForeground(Color.BLACK);
-        bOblicz.setFont(new Font("Trebuchet MS", Font.BOLD, 25));
-        add(bOblicz);
-        bOblicz.addActionListener(this);
+        bCalculate=new JButton ("OBLICZ");
+        bCalculate.setBounds(255,760,200,70);
+        bCalculate.setBackground(new Color(250,224,120));
+        bCalculate.setForeground(Color.BLACK);
+        bCalculate.setFont(new Font("Trebuchet MS", Font.BOLD, 25));
+        add(bCalculate);
+        bCalculate.addActionListener(this);
         
         
     }
@@ -219,26 +218,26 @@ public class Dane extends JPanel implements ActionListener {
        
        
         /** Zamiana String (pobranego z pola tekstowego) na double*/
-        podanamasa = Double.parseDouble(tmasa.getText());
-        podanywzrost = Double.parseDouble(twzrost.getText());
-        podanywiek = Double.parseDouble(twiek.getText());
+        givenweight = Double.parseDouble(tweight.getText());
+        givenheight = Double.parseDouble(theight.getText());
+        givenage = Double.parseDouble(tage.getText());
         
         /** Jeśli wybierzemy opcję "kobieta" */
        
-        if (Bplec.getSelectedIndex() == 0){
+        if (BSex.getSelectedIndex() == 0){
         /** Wzór obliczenia*/
-        liczbakalorii = 655+(9.6*podanamasa)+(1.8*podanywzrost)-(4.7*podanywiek);
+        numberofcalories = 655+(9.6*givenweight)+(1.8*givenheight)-(4.7*givenage);
         /** Przypisanie wyniku do pola tekstowego */
-        tliczbakalorii.setText(String.valueOf(liczbakalorii));
+        tcalories.setText(String.valueOf(numberofcalories));
               
         }
         /** Jeśli wybierzemy opcję "mężczyzna"*/
         
         else{
         /** Wzór obliczenia*/
-        liczbakalorii = 66.5+(13.7*podanamasa)+(5*podanywzrost)-(6.8*podanywiek);
+        numberofcalories = 66.5+(13.7*givenweight)+(5*givenheight)-(6.8*givenage);
         /** Przypisanie wyniku do pola tekstowego */
-        tliczbakalorii.setText(String.valueOf(liczbakalorii));
+        tcalories.setText(String.valueOf(numberofcalories));
         
         }
      
@@ -247,7 +246,7 @@ public class Dane extends JPanel implements ActionListener {
         */
         try {
             PrintWriter zapis= new PrintWriter("zapis_zapotrzebowania kalorycznego.txt");
-            zapis.println("" +liczbakalorii);
+            zapis.println("" +numberofcalories);
             zapis.close();
         } catch (FileNotFoundException ex) {
             Logger.getLogger(Dane.class.getName()).log(Level.SEVERE, null, ex);

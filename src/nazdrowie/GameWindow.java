@@ -78,7 +78,7 @@ public class GameWindow extends JFrame{
     cl.show(cardPanel, "MENU");
     
     //po kliknieciu buttonu Nowa Gra w Menu otwierana sie Dane Gracza, itd.
-    menu.bNowaGra.addActionListener(new ActionListener(){
+    menu.bNewGame.addActionListener(new ActionListener(){
         
         @Override
         public void actionPerformed(ActionEvent e){
@@ -89,7 +89,7 @@ public class GameWindow extends JFrame{
     
        
        
-     menu.bWyswietlInfo.addActionListener(new ActionListener(){
+     menu.bInfo.addActionListener(new ActionListener(){
         @Override
         public void actionPerformed(ActionEvent e){
             cl.show(cardPanel, "INFORMACJE O PRODUKTACH1");
@@ -97,14 +97,14 @@ public class GameWindow extends JFrame{
         }
     });
       
-     menu.bZakonczGre.addActionListener(new ActionListener(){
+     menu.bExit.addActionListener(new ActionListener(){
         @Override
         public void actionPerformed(ActionEvent e){
         System.exit(0);
             
         }
     });
-      menu.bInstrukcja.addActionListener(new ActionListener(){
+      menu.bInstruction.addActionListener(new ActionListener(){
         @Override
         public void actionPerformed(ActionEvent e){
         cl.show(cardPanel, "INSTRUKCJA");
@@ -131,7 +131,7 @@ public class GameWindow extends JFrame{
         }
     });
     
-      instrukcja.bPrzejdzDoMenu.addActionListener(new ActionListener(){
+      instrukcja.bMenu.addActionListener(new ActionListener(){
         @Override
         public void actionPerformed(ActionEvent e){
         cl.show(cardPanel, "MENU");
@@ -139,7 +139,7 @@ public class GameWindow extends JFrame{
         }
     });
       
-      info1.bPrzejdzDoMenu.addActionListener(new ActionListener(){
+      info1.bMenu.addActionListener(new ActionListener(){
         @Override
         public void actionPerformed(ActionEvent e){
         cl.show(cardPanel, "MENU");
@@ -147,7 +147,7 @@ public class GameWindow extends JFrame{
         }
     });
       
-      info1.bNastepnaStrona.addActionListener(new ActionListener(){
+      info1.bNext.addActionListener(new ActionListener(){
         @Override
         public void actionPerformed(ActionEvent e){
         cl.show(cardPanel, "INFORMACJE O PRODUKTACH2");
@@ -155,7 +155,7 @@ public class GameWindow extends JFrame{
         }
     });
        
-      info2.bPrzejdzDoMenu.addActionListener(new ActionListener(){
+      info2.bMenu.addActionListener(new ActionListener(){
         @Override
         public void actionPerformed(ActionEvent e){
         cl.show(cardPanel, "MENU");
@@ -163,7 +163,7 @@ public class GameWindow extends JFrame{
         }
     });
       
-      info2.bNastepnaStrona.addActionListener(new ActionListener(){
+      info2.bNext.addActionListener(new ActionListener(){
         @Override
         public void actionPerformed(ActionEvent e){
         cl.show(cardPanel, "INFORMACJE O PRODUKTACH3");
@@ -172,7 +172,7 @@ public class GameWindow extends JFrame{
       
     });
       
-      info2.bPoprzedniaStrona.addActionListener(new ActionListener(){
+      info2.bPrev.addActionListener(new ActionListener(){
         @Override
         public void actionPerformed(ActionEvent e){
         cl.show(cardPanel, "INFORMACJE O PRODUKTACH1");
@@ -182,7 +182,7 @@ public class GameWindow extends JFrame{
     });
       
        
-      info3.bPrzejdzDoMenu.addActionListener(new ActionListener(){
+      info3.bMenu.addActionListener(new ActionListener(){
         @Override
         public void actionPerformed(ActionEvent e){
         cl.show(cardPanel, "MENU");
@@ -190,7 +190,7 @@ public class GameWindow extends JFrame{
         }
     });
       
-      info3.bNastepnaStrona.addActionListener(new ActionListener(){
+      info3.bNext.addActionListener(new ActionListener(){
         @Override
         public void actionPerformed(ActionEvent e){
         cl.show(cardPanel, "INFORMACJE O PRODUKTACH4");
@@ -198,7 +198,7 @@ public class GameWindow extends JFrame{
         }
     });
       
-      info3.bPoprzedniaStrona.addActionListener(new ActionListener(){
+      info3.bPrev.addActionListener(new ActionListener(){
         @Override
         public void actionPerformed(ActionEvent e){
         cl.show(cardPanel, "INFORMACJE O PRODUKTACH2");
@@ -206,7 +206,7 @@ public class GameWindow extends JFrame{
         }
       
     });
-       info4.bPrzejdzDoMenu.addActionListener(new ActionListener(){
+       info4.bMenu.addActionListener(new ActionListener(){
         @Override
         public void actionPerformed(ActionEvent e){
         cl.show(cardPanel, "MENU");
@@ -214,14 +214,14 @@ public class GameWindow extends JFrame{
         }
     });
       
-      danegracza.bPrzejdzDoMenu.addActionListener(new ActionListener(){
+      danegracza.bMenu.addActionListener(new ActionListener(){
         @Override
         public void actionPerformed(ActionEvent e){
         cl.show(cardPanel, "MENU");
             
         }
     });
-      info4.bPoprzedniaStrona.addActionListener(new ActionListener(){
+      info4.bPrev.addActionListener(new ActionListener(){
         @Override
         public void actionPerformed(ActionEvent e){
         cl.show(cardPanel, "INFORMACJE O PRODUKTACH3");
@@ -230,7 +230,7 @@ public class GameWindow extends JFrame{
       
     });
       
-       danegracza.bOblicz.addActionListener(new ActionListener(){
+       danegracza.bCalculate.addActionListener(new ActionListener(){
         @Override
         public void actionPerformed(ActionEvent e){
         cl.show(cardPanel, "WYNIK");
@@ -238,12 +238,12 @@ public class GameWindow extends JFrame{
         }
     });    
        
-       danegracza.bGraj.addActionListener(new ActionListener(){
+       danegracza.bPlay.addActionListener(new ActionListener(){
         @Override
         public void actionPerformed(ActionEvent e){
         nowagra.restartGame();
-        nowagra.przegrano=false;
-        nowagra.wygrano=false;
+        nowagra.loss=false;
+        nowagra.win=false;
         cl.show(cardPanel, "NOWA GRA");
             
         }
@@ -259,7 +259,7 @@ public class GameWindow extends JFrame{
     });    
        
          
-       nowagra.bPoziom2.addActionListener(new ActionListener(){
+       nowagra.bLevel2.addActionListener(new ActionListener(){
         @Override
         public void actionPerformed(ActionEvent e){
         poziom2.restartGame();
@@ -268,7 +268,7 @@ public class GameWindow extends JFrame{
         }
     });    
        
-        poziom2.bPoziom3.addActionListener(new ActionListener(){
+        poziom2.bLevel3.addActionListener(new ActionListener(){
         @Override
         public void actionPerformed(ActionEvent e){
         poziom3.restartGame();

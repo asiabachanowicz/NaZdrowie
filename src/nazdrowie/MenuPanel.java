@@ -22,10 +22,10 @@ import javax.swing.JPanel;
  */
 public class MenuPanel  extends JPanel {
     
-    JButton bNowaGra;
-    JButton bWyswietlInfo;
-    JButton bZakonczGre;
-    JButton bInstrukcja;
+    JButton bNewGame;
+    JButton bInfo;
+    JButton bExit;
+    JButton bInstruction;
     BufferedImage image1;
     BufferedImage background;
     
@@ -38,36 +38,36 @@ public MenuPanel(){
         setSize(1200,900);
         setLayout(null);
         
-        bNowaGra=new JButton ("NOWA GRA");
-        bNowaGra.setBounds(280,220,640,100);
-        bNowaGra.setBackground(new Color(250,224,120));
-        bNowaGra.setForeground(Color.BLACK);
-        bNowaGra.setFont(new Font("Trebuchet MS", Font.BOLD, 30));
-        add(bNowaGra);
+        bNewGame=new JButton ("NOWA GRA");
+        bNewGame.setBounds(280,220,640,100);
+        bNewGame.setBackground(new Color(250,224,120));
+        bNewGame.setForeground(Color.BLACK);
+        bNewGame.setFont(new Font("Trebuchet MS", Font.BOLD, 30));
+        add(bNewGame);
         
                 
-        bWyswietlInfo=new JButton ("WYŚWIETL INFORMACJE O PRODUKTACH");
-        bWyswietlInfo.setBounds(280,380,640,100);
-        bWyswietlInfo.setBackground(new Color(250,224,120));
-        bWyswietlInfo.setForeground(Color.BLACK);
-        bWyswietlInfo.setFont(new Font("Trebuchet MS", Font.BOLD, 30));
-        add(bWyswietlInfo);
+        bInfo=new JButton ("WYŚWIETL INFORMACJE O PRODUKTACH");
+        bInfo.setBounds(280,380,640,100);
+        bInfo.setBackground(new Color(250,224,120));
+        bInfo.setForeground(Color.BLACK);
+        bInfo.setFont(new Font("Trebuchet MS", Font.BOLD, 30));
+        add(bInfo);
         
         
-        bZakonczGre=new JButton ("ZAKOŃCZ GRĘ");
-        bZakonczGre.setBounds(280,680,640,100);
-        bZakonczGre.setBackground(new Color(250,224,120));
-        bZakonczGre.setForeground(Color.BLACK);
-        bZakonczGre.setFont(new Font("Trebuchet MS", Font.BOLD, 30));
-        add(bZakonczGre);
+        bExit=new JButton ("ZAKOŃCZ GRĘ");
+        bExit.setBounds(280,680,640,100);
+        bExit.setBackground(new Color(250,224,120));
+        bExit.setForeground(Color.BLACK);
+        bExit.setFont(new Font("Trebuchet MS", Font.BOLD, 30));
+        add(bExit);
        
         
-        bInstrukcja=new JButton ("WYŚWIETL INSTRUKCJĘ");
-        bInstrukcja.setBounds(280,530,640,100);
-        bInstrukcja.setBackground(new Color(250,224,120));
-        bInstrukcja.setForeground(Color.BLACK);
-        bInstrukcja.setFont(new Font("Trebuchet MS", Font.BOLD, 30));
-        add(bInstrukcja);
+        bInstruction=new JButton ("WYŚWIETL INSTRUKCJĘ");
+        bInstruction.setBounds(280,530,640,100);
+        bInstruction.setBackground(new Color(250,224,120));
+        bInstruction.setForeground(Color.BLACK);
+        bInstruction.setFont(new Font("Trebuchet MS", Font.BOLD, 30));
+        add(bInstruction);
            
 }
 /**

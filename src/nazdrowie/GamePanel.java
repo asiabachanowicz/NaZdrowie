@@ -58,17 +58,17 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener   {
     public Font menuFont;
     public Font menuFont2;
     /**Czy gre wygrano/przegrano*/
-    public boolean przegrano=false;
-    public boolean wygrano=false;
+    public boolean loss=false;
+    public boolean win=false;
     /**Obliczone dzienne zapotrzebowanie na kalorie */
-    public double kalorie;
+    public double calories;
     /**Pola tekstowe, buttony */
-    JLabel LPoziom;
-    JLabel LKalorie;
-    JLabel LZycia;
-    JLabel LDoZdobycia;
+    JLabel LLevel;
+    JLabel LCalories;
+    JLabel LFail;
+    JLabel LToBeWon;
     JButton bMenu;
-    JButton bPoziom2;
+    JButton bLevel2;
   
     Timer t = new Timer (5, this);
     /** Początkowe wspolrzedne ludzika, przesunięcie współrzędnych*/
@@ -104,12 +104,12 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener   {
         
         // Przycisk ->Poziom
         setLayout(null);
-        bPoziom2= new JButton("->POZIOM");
-        bPoziom2.setBackground(new Color(250,224,120));
-        bPoziom2.setForeground(Color.BLACK);
-        bPoziom2.setFont(new Font("Trebuchet MS", Font.BOLD, 30));
-        bPoziom2.setBounds(1000, 730, 200, 70);
-        add(bPoziom2);
+        bLevel2= new JButton("->POZIOM");
+        bLevel2.setBackground(new Color(250,224,120));
+        bLevel2.setForeground(Color.BLACK);
+        bLevel2.setFont(new Font("Trebuchet MS", Font.BOLD, 30));
+        bLevel2.setBounds(1000, 730, 200, 70);
+        add(bLevel2);
            
         barHeight=100; //szerokosc paska menu 
         objectsInLine=1;
@@ -144,7 +144,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener   {
         //Na tle obiektu pierwszego planu
         //zdrowe jedzenie
         
-        if(przegrano==false == wygrano==false){
+        if(loss==false == win==false){
         for(int i=0;i<fFood.length;i++){
             fFood[i].calculatePathPos(GPars.MoveMODE=1);
                 if(!fFood[i].hit){
@@ -155,7 +155,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener   {
         for(int i=0;i<fFood2.length;i++){
             fFood2[i].calculatePathPos(GPars.MoveMODE=1);
                 if(!fFood2[i].hit){
-                    g.drawImage(fFood2[i].icon,fFood2[i].currX+50,fFood2[i].currY+80,(int)(fFood2[i].ikona.getWidth(null) ), (int)(fFood2[i].ikona.getHeight(null)),null); 
+                    g.drawImage(fFood2[i].icon,fFood2[i].currX+50,fFood2[i].currY+80,(int)(fFood2[i].iconUnhealthy.getWidth(null) ), (int)(fFood2[i].iconUnhealthy.getHeight(null)),null); 
                 }
             }
         }
@@ -170,7 +170,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener   {
                //odtworzenie dzwieku
                playSound(new File("sounds/eatingsound.wav"));
                //zwiekszamy liczbe punktow
-               if (gStatus.liczbazyc>=1){
+               if (gStatus.fail>=1){
                gStatus.points+=70;
                }
             }
@@ -180,14 +180,14 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener   {
         for(int i=0;i<fFood2.length;i++){
             if(fFood2[i].hit){
                 //odrysowanie elementow
-                g.drawImage(fFood2[i].icon,fFood2[i].currX+50,fFood2[i].currY=0,(int)(fFood2[i].ikona.getWidth(null) ), (int)(fFood2[i].ikona.getHeight(null)),null);  
+                g.drawImage(fFood2[i].icon,fFood2[i].currX+50,fFood2[i].currY=0,(int)(fFood2[i].iconUnhealthy.getWidth(null) ), (int)(fFood2[i].iconUnhealthy.getHeight(null)),null);  
                 fFood2[i].hit=false;
                 //zmniejszamy liczbe zyc
-                gStatus.liczbazyc--;
+                gStatus.fail--;
                 //odtworzenie dzwieku
                 playSound(new File("sounds/error.wav"));
                 //zwiekszamy liczbe punktow
-                if (gStatus.liczbazyc>=1){
+                if (gStatus.fail>=1){
                 gStatus.points+=200;
                 }
             }      
@@ -198,7 +198,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener   {
         g.fillRect(0, 800, 1280, 100);
         
         //Informacja o liczbie kalorii do zdobycia
-        g.drawImage(GPars.ilekalorii, 785, 15, null);  
+        g.drawImage(GPars.calories, 785, 15, null);  
         
      /**
      * Pobieranie z pliku i wyświetlanie liczby kalorii do zdobycia
@@ -206,13 +206,13 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener   {
           try {
             Scanner odczyt = new Scanner(new File("zapis_zapotrzebowania kalorycznego.txt"));
             String zdanie = odczyt.nextLine();
-	    LDoZdobycia= new JLabel(zdanie);
-            LDoZdobycia.setBounds(890,35,200,100);
-            LDoZdobycia.setForeground(Color.RED);
-            LDoZdobycia.setFont(new Font("Trebuchet MS", Font.PLAIN, 40));
-            add(LDoZdobycia);
-            String dozdobycia = LDoZdobycia.getText();
-            kalorie = Double.parseDouble(LDoZdobycia.getText());
+	    LToBeWon= new JLabel(zdanie);
+            LToBeWon.setBounds(890,35,200,100);
+            LToBeWon.setForeground(Color.RED);
+            LToBeWon.setFont(new Font("Trebuchet MS", Font.PLAIN, 40));
+            add(LToBeWon);
+            String dozdobycia = LToBeWon.getText();
+            calories = Double.parseDouble(LToBeWon.getText());
             
         } catch (FileNotFoundException ex) {
             Logger.getLogger(Dane.class.getName()).log(Level.SEVERE, null, ex);
@@ -241,7 +241,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener   {
         }
             
         //koniec gry gdy stracono zycia
-        if(gStatus.liczbazyc==0 ){
+        if(gStatus.fail==0 ){
             
             //napisy po przegraniu gry
             g.setColor(Color.red);;
@@ -252,12 +252,12 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener   {
             g.setFont(new Font("Trebuchet MS", Font.PLAIN, 40));
             g.drawString("ZAJRZYJ DO INFORMACJI O PRODUKTACH!",220, 450);
            
-            przegrano=true;
-            wygrano=false;
+            loss=true;
+            win=false;
         }
             
         //gdy zdobyto dzienne zapotrzebowanie - wygrana
-        if(gStatus.points>=kalorie){
+        if(gStatus.points>=calories){
            //napisy gry wygrano 
             g.setColor(Color.red);;
             g.setFont(new Font("Trebuchet MS", Font.PLAIN, 70));
@@ -273,18 +273,18 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener   {
             g.setFont(new Font("Trebuchet MS", Font.PLAIN, 40));
             g.drawString("PRZEJDŹ DO POZIOMU 2",385, 500);
             
-           wygrano=true;
-           przegrano=false;
+           win=true;
+           loss=false;
         }
 
         
         //Napisy w pasku Menu    
         //wyswietlanie poziomu
-        LPoziom= new JLabel("POZIOM "+gStatus.level);
-        LPoziom.setBounds(100,785,200,100);
-        LPoziom.setForeground(Color.BLACK);
-        LPoziom.setFont(new Font("Trebuchet MS", Font.PLAIN, 40));
-        add(LPoziom);
+        LLevel= new JLabel("POZIOM "+gStatus.level);
+        LLevel.setBounds(100,785,200,100);
+        LLevel.setForeground(Color.BLACK);
+        LLevel.setFont(new Font("Trebuchet MS", Font.PLAIN, 40));
+        add(LLevel);
         
         //Ustaw kolor napisu kalorii
         g.setColor(new Color(12,203,107));;
@@ -294,25 +294,25 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener   {
         
         //wyswietlanie liczby zdobytych kalorii
         g.drawString(""+gStatus.points,600, 845);
-        LKalorie= new JLabel("KALORIE ");
-        LKalorie.setBounds(400,785,200,100);
-        LKalorie.setForeground(Color.BLACK);
-        LKalorie.setFont(new Font("Trebuchet MS", Font.PLAIN, 40));
-        add(LKalorie);
+        LCalories= new JLabel("KALORIE ");
+        LCalories.setBounds(400,785,200,100);
+        LCalories.setForeground(Color.BLACK);
+        LCalories.setFont(new Font("Trebuchet MS", Font.PLAIN, 40));
+        add(LCalories);
         
         //ikona opisujaca liczbe zyc        
-        g.drawImage(GPars.zycia, 700, 772, null);
+        g.drawImage(GPars.fail, 700, 772, null);
         
         //Ustaw kolor napisu liczby żyć
         g.setColor(new Color(252,79,54));;
         
         //wyswietlanie liczby dostepnych zyc
-        g.drawString(""+gStatus.liczbazyc,825, 845);
-        LZycia= new JLabel(":");
-        LZycia.setBounds(800,785,200,100);
-        LZycia.setForeground(Color.BLACK);
-        LZycia.setFont(new Font("Trebuchet MS", Font.PLAIN, 40));
-        add(LZycia);
+        g.drawString(""+gStatus.fail,825, 845);
+        LFail= new JLabel(":");
+        LFail.setBounds(800,785,200,100);
+        LFail.setForeground(Color.BLACK);
+        LFail.setFont(new Font("Trebuchet MS", Font.PLAIN, 40));
+        add(LFail);
         
         //wyswietlanie logo w rogu okna       
         g.drawImage(GPars.minilogo, 0, 750, null);
@@ -326,7 +326,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener   {
       repaint ();
       requestFocus();
       
-      if(przegrano==false == wygrano==false){
+      if(loss==false == win==false){
         //zwiekszenie/zmniejszenie wspolrzednej x
         x += velx;
       }
@@ -409,8 +409,8 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener   {
         gStatus.resetPoints();
         gStatus.reset();
         gStatus.level=1;
-        przegrano=false;
-        wygrano=false;
+        loss=false;
+        win=false;
         int offset=1200/objectsInLine; 
         int inLine=0;    
         int yLine=0;

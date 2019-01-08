@@ -37,9 +37,9 @@ public class FlyingFood {
     /** Czestotliwosc funkcji sinus (poziom 3) opisujacej ruch spadajacego obiektu */
     public double freq;
     /** Rodzaj spadajacego obiektu -zdrowe*/
-    public int ktoryobiekt;
+    public int whichObject;
     /** Rodzaj spadajacego obiektu -niezdrowe*/
-    public int ktoryobiekt2;
+    public int whichObject2;
     /** Omega 2Pi*f */
     public final static double w=2*Math.PI;
     /** Szerokosc pola graficznego*/
@@ -51,7 +51,7 @@ public class FlyingFood {
     /** Ikona spadajacego obiektu - zdrowe*/
     public Image icon;
      /** Ikona spadajacego obiektu -niezdrowe*/
-    public Image ikona;
+    public Image iconUnhealthy;
     
    /**
      * Konstruktor - ustawienie parametrów obiektu, wylosowanie rodzaju spadającego obiektu, 
@@ -85,14 +85,14 @@ public class FlyingFood {
         this.freq=freq;
        
         /** Losujemy spadający obiekt - zdrowe jedzenie*/
-        int ktoryobiekt=rand.nextInt(24);
-        if(ktoryobiekt>=images.length) ;
-        icon=images[ktoryobiekt];
+        int whichObject=rand.nextInt(24);
+        if(whichObject>=images.length) ;
+        icon=images[whichObject];
        
         /** Losujemy spadający obiekt - niezdrowe jedzenie*/
-        int ktoryobiekt2=rand.nextInt(24);
-        if(ktoryobiekt2>=images.length) ;
-        ikona=images[ktoryobiekt2];
+        int whichObject2=rand.nextInt(24);
+        if(whichObject2>=images.length) ;
+        iconUnhealthy=images[whichObject2];
         
         /** Ustawiamy pulsację w funkcji sinus*/
         setOmega(this.freq);

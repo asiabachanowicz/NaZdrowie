@@ -22,9 +22,9 @@ import javax.swing.JPanel;
 
 public class Informacje2 extends JPanel  {
     
-    JButton bPrzejdzDoMenu;
-    JButton bNastepnaStrona;
-    JButton bPoprzedniaStrona;
+    JButton bMenu;
+    JButton bNext;
+    JButton bPrev;
     BufferedImage background;
     
     
@@ -37,26 +37,26 @@ public class Informacje2 extends JPanel  {
         GPars.loadInitialImages();
         setLayout(null);
  
-        bPrzejdzDoMenu=new JButton ("PRZEJDŹ DO MENU");
-        bPrzejdzDoMenu.setBounds(250,770,200,30);
-        bPrzejdzDoMenu.setBackground(new Color(250,224,120));
-        bPrzejdzDoMenu.setForeground(Color.BLACK);
-        bPrzejdzDoMenu.setFont(new Font("Trebuchet MS", Font.BOLD, 15));
-        add(bPrzejdzDoMenu);
+        bMenu=new JButton ("PRZEJDŹ DO MENU");
+        bMenu.setBounds(250,770,200,30);
+        bMenu.setBackground(new Color(250,224,120));
+        bMenu.setForeground(Color.BLACK);
+        bMenu.setFont(new Font("Trebuchet MS", Font.BOLD, 15));
+        add(bMenu);
         
-        bPoprzedniaStrona=new JButton ("POPRZEDNIA STRONA");
-        bPoprzedniaStrona.setBounds(500,770,200,30); 
-        bPoprzedniaStrona.setBackground(new Color(250,224,120));
-        bPoprzedniaStrona.setForeground(Color.BLACK);
-        bPoprzedniaStrona.setFont(new Font("Trebuchet MS", Font.BOLD, 15));
-        add(bPoprzedniaStrona);
+        bPrev=new JButton ("POPRZEDNIA STRONA");
+        bPrev.setBounds(500,770,200,30); 
+        bPrev.setBackground(new Color(250,224,120));
+        bPrev.setForeground(Color.BLACK);
+        bPrev.setFont(new Font("Trebuchet MS", Font.BOLD, 15));
+        add(bPrev);
         
-        bNastepnaStrona=new JButton ("NASTĘPNA STRONA");
-        bNastepnaStrona.setBounds(750,770,200,30);
-        bNastepnaStrona.setBackground(new Color(250,224,120));
-        bNastepnaStrona.setForeground(Color.BLACK);
-        bNastepnaStrona.setFont(new Font("Trebuchet MS", Font.BOLD, 15));
-        add(bNastepnaStrona);
+        bNext=new JButton ("NASTĘPNA STRONA");
+        bNext.setBounds(750,770,200,30);
+        bNext.setBackground(new Color(250,224,120));
+        bNext.setForeground(Color.BLACK);
+        bNext.setFont(new Font("Trebuchet MS", Font.BOLD, 15));
+        add(bNext);
        
         
         

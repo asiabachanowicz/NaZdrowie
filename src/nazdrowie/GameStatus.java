@@ -15,13 +15,13 @@ public class GameStatus {
     /** Numer poziomu */
     public int level;
     /** Liczba żyć */
-    public int liczbazyc=3;
+    public int fail=3;
     
     
   /** Zeruj parametry gry */
     public void reset(){
         points=0;
-        liczbazyc=3;
+        fail=3;
     }
     
    /** Zeruj liczbę punktów */

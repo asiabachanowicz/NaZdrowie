@@ -26,7 +26,7 @@ public class GPars {
     /**  Obraz ikony logo   */
     public static Image logoImage;
     /**  Obraz straty zycia   */
-    public static Image zycia;    
+    public static Image fail;    
     /**  Tablica obiektow pierwszego planu - zdrowe jedzenie */
     public static Image[] food;
     /**  Tablica obiektow pierwszego planu -niezdrowe jedzenie   */
@@ -40,14 +40,14 @@ public class GPars {
     /** Tło Menu */
     public static Image menubackground;
     /** Instrukcja */
-    public static Image instrukcja;
+    public static Image instruction;
     /** Informacje o produktach */
     public static Image info1;
     public static Image info2;
     public static Image info3;
     public static Image info4;
     /** Pasek z liczbą kalorii */
-    public static Image ilekalorii;
+    public static Image calories;
     
     /**
      * Metoda ladowania poczatkowych zasobow gry
@@ -59,15 +59,15 @@ public class GPars {
         bgImage = loadImage("images/tlo.jpg");       
         logoImage=loadImage("images/logo.png");
         body=loadImage("images/body.png");
-        zycia=loadImage("images/pizza2.png");
+        fail=loadImage("images/pizza2.png");
         minilogo=loadImage("images/logomini.png");
         menubackground = loadImage("images/2.png");
-        instrukcja = loadImage("images/instrukcja2.png");
+        instruction = loadImage("images/instrukcja2.png");
         info1 = loadImage("images/info1.png");
         info2 = loadImage("images/info2.png");
         info3 = loadImage("images/info3.png");
         info4 = loadImage("images/info4.png");
-        ilekalorii = loadImage("images/kalorie.png");
+        calories = loadImage("images/kalorie.png");
 
          //tablica ze zdrowymi produktami
         food= new Image[24];

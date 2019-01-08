@@ -21,8 +21,8 @@ import javax.swing.JPanel;
 
 public class Instrukcja  extends JPanel   {
     
-    JButton bPrzejdzDoMenu;
-    BufferedImage instrukcja;
+    JButton bMenu;
+    BufferedImage instruction;
     
     /**
      * Konstruktor - wstawienie buttonów, instrukcji w formie obrazu jpg
@@ -33,12 +33,12 @@ public class Instrukcja  extends JPanel   {
         GPars.loadInitialImages();
         setLayout(null);
  
-        bPrzejdzDoMenu=new JButton ("PRZEJDŹ DO MENU");
-        bPrzejdzDoMenu.setBounds(740,770,200,30);
-        bPrzejdzDoMenu.setBackground(new Color(250,224,120));
-        bPrzejdzDoMenu.setForeground(Color.BLACK);
-        bPrzejdzDoMenu.setFont(new Font("Trebuchet MS", Font.BOLD, 15));
-        add(bPrzejdzDoMenu);
+        bMenu=new JButton ("PRZEJDŹ DO MENU");
+        bMenu.setBounds(740,770,200,30);
+        bMenu.setBackground(new Color(250,224,120));
+        bMenu.setForeground(Color.BLACK);
+        bMenu.setFont(new Font("Trebuchet MS", Font.BOLD, 15));
+        add(bMenu);
         
                 
     }
@@ -53,7 +53,7 @@ public class Instrukcja  extends JPanel   {
         g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
         // Narysuj tło
         g.drawImage(GPars.menubackground, 0, 0, null);
-        g.drawImage(GPars.instrukcja, 0, 0, null);
+        g.drawImage(GPars.instruction, 0, 0, null);
 
  }
     
